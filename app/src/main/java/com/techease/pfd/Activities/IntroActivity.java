@@ -1,4 +1,4 @@
-package com.techease.pfd;
+package com.techease.pfd.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.techease.pfd.Fragments.SliderFragmanet;
 
 public class IntroActivity extends AppIntro {
     @Override

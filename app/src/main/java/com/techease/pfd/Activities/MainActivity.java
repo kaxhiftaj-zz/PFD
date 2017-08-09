@@ -1,4 +1,4 @@
-package com.techease.pfd;
+package com.techease.pfd.Activities;
 
 import android.content.res.ColorStateList;
 import android.os.Build;
@@ -16,6 +16,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.techease.pfd.Fragments.Bakers;
+import com.techease.pfd.Fragments.Chinese;
+import com.techease.pfd.Fragments.FastFood;
+import com.techease.pfd.Fragments.Italian;
+import com.techease.pfd.R;
+import com.techease.pfd.Fragments.Traditional;
+import com.techease.pfd.Fragments.Turkish;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

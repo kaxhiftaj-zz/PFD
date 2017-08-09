@@ -1,4 +1,4 @@
-package com.techease.pfd;
+package com.techease.pfd.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,14 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.techease.pfd.R;
 
-public class Bakers extends Fragment {
+
+public class Chinese extends Fragment {
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bakers, container, false);
+        return inflater.inflate(R.layout.fragment_chinese, container, false);
     }
-
 }
