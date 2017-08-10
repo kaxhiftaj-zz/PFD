@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         NavigationMenuView navMenuView = (NavigationMenuView) navigationView.getChildAt(0);
-        navigationView.setItemTextColor(ColorStateList.valueOf(getColor(R.color.colorAccent)));
+//        navigationView.setItemTextColor(ColorStateList.valueOf(getColor(R.color.colorAccent)));
         navMenuView.addItemDecoration(new DividerItemDecoration(MainActivity.this, DividerItemDecoration.VERTICAL));
 
         Fragment fastFood = null;

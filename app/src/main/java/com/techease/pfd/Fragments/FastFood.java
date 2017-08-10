@@ -8,7 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.techease.pfd.Controller.Resturants;
+import com.techease.pfd.Controller.ItemHelper;
+import com.techease.pfd.Controller.MyAdapter;
 import com.techease.pfd.R;
 
 import java.util.ArrayList;
@@ -17,31 +18,35 @@ import java.util.List;
 
 public class FastFood extends Fragment {
 
-    List<Resturants> data ;
-
+    List<ItemHelper> data ;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_fast_food, container, false);
-        data = new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) v.findViewById(R.id.fastFood);
-
-        ResturantsListAdapter adapter = new ResturantsListAdapter(data, getContext());
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.rfastFood);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
         fill_with_data();
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        // specify an adapter (see also next example)
+        mAdapter = new MyAdapter(data);
+        mRecyclerView.setAdapter(mAdapter);
 
         return  v ;
 
     }
 
     public void fill_with_data() {
-        data.add(new Resturants("Batman ", R.drawable.pfd));
-        data.add(new Resturants("X-Menn ", R.drawable.pfd));
-        data.add(new Resturants("Captai ", R.drawable.pfd));
+        data = new ArrayList<>();
+        data.add(new ItemHelper("Batman ", R.drawable.pfd));
+        data.add(new ItemHelper("X-Menn ", R.drawable.pfd));
+        data.add(new ItemHelper("Captai ", R.drawable.pfd));
 
     }
 }
