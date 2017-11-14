@@ -20,12 +20,6 @@
         <activity
             android:name=".Activities.Splash"
             android:theme="@style/Full">
-
-        </activity>
-        <activity
-            android:name=".Activities.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

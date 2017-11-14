@@ -41,6 +41,7 @@
 
     <style name="NavigationViewStyle">
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FF5469</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:listPreferredItemHeightSmall">60dp</item><!-- menu item height-->
     </style>
