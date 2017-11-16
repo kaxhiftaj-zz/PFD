@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#eee"
+    android:padding="10sp"
+    tools:context="com.techease.pfd.Fragments.BestDeal">
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:background="#fff"
+        android:id="@+id/svBestdeal"></SearchView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvBestDeal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10sp"
+        android:layout_height="match_parent"
+        ></android.support.v7.widget.RecyclerView>
+</LinearLayout>

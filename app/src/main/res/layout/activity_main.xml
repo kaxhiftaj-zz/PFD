@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@drawable/loginbackpic">
+
+
+    <ImageView
+        android:layout_width="170sp"
+        android:layout_height="120sp"
+        android:background="@drawable/whitelogo"
+        android:id="@+id/imageView2"
+        android:layout_marginTop="120sp"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/btnFb"
+        android:layout_width="270sp"
+        android:layout_height="50sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30sp"
+        android:background="@drawable/loginbutton"
+        android:drawableLeft="@drawable/facebook_logo"
+        android:drawablePadding="20sp"
+        android:gravity="center"
+        android:paddingLeft="20sp"
+        android:text="Log In With Facebook"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:paddingBottom="5sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="100sp"
+            android:layout_height="2sp"
+            android:background="#fff"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:layout_marginLeft="5sp"
+            android:layout_marginRight="5sp"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:textColor="#fff"/>
+        <View
+            android:layout_width="100sp"
+            android:layout_height="2sp"
+            android:background="#fff"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnEmail"
+        android:layout_width="270sp"
+        android:layout_height="50sp"
+        android:background="@drawable/loginwithemail"
+        android:drawableLeft="@drawable/email"
+        android:text="Log In With Email"
+        android:textColor="#129FDD"
+        android:paddingLeft="20sp"
+        android:layout_marginTop="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="7sp"
+        android:textSize="16sp"
+        android:layout_gravity="center"
+        />
+</LinearLayout>

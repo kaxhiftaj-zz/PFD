@@ -2,8 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/intro3"
-    tools:context="com.techease.pfd.intro3">
-
+    android:background="@drawable/intro3back"
+    tools:context="com.techease.pfd.Activities.intro3">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="250sp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/introrectangle"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:text="HOME"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="#fff"
+        android:layout_marginBottom="170sp"/>
+    <View
+        android:layout_width="250sp"
+        android:layout_height="2sp"
+        android:background="#fff"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="165sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MANY PEOPLE UNDERSTAND THE CONCEPT OF PASSIVE SOLAR FOR HEATING A HOME. FEWER REALIZE IT CAN BE USED IN TO COOK FOOD AND STERILIZE WATER."
+        android:textColor="#fff"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="70sp"
+        android:textSize="15sp"
+        android:textAlignment="center"/>
 
 </FrameLayout>

@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fff"
+    tools:context="com.techease.pfd.Fragments.Pesh_FD_Details">
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="200sp"
+    android:id="@+id/ivPesh_FD_Detial"
+    android:background="#eee"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PIZZA HUT"
+        android:textSize="20sp"
+        android:textColor="#275786"
+        android:textStyle="bold"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="20sp"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <ImageView
+        android:layout_width="15sp"
+        android:layout_height="25sp"
+        android:layout_marginTop="5sp"
+        android:background="@drawable/locationicon"
+        android:layout_marginLeft="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PESHAWAR"
+            android:textSize="15sp"
+            android:layout_marginLeft="10sp"
+            android:textColor="#129FDD"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+    <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:background="#fff"
+        android:gravity="center"
+        android:layout_marginTop="5sp"
+        android:textAlignment="center"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayoutPizzaHut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="fixed"
+            android:layout_gravity="center"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pagerInfoPizzaHut"
+        android:layout_marginTop="5sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+</LinearLayout>

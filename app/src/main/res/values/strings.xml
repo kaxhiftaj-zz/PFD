@@ -5,4 +5,16 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="LongTextPizzaHutInfo">The simplest way to add Facebook Login to your app is to add LoginButton from the SDK. The LoginButton is a UI element that wraps functionality available in the LoginManager. When someone clicks on the button, the login is initiated with the permissions set in the LoginManager. The button follows the login state, and displays the correct text based on someone\'s authentication state</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+
+    <string name="newPass"><font size="15">ENTER NEW PASSWORD</font></string>
 </resources>

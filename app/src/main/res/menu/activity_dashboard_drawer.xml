@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:title="PFD" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:title="FACEBOOK POST" />
+        <item
+            android:id="@+id/nav_slideshow"
+            android:title="BEST DEALS" />
+        <item
+            android:id="@+id/nav_manage"
+            android:title="COUPANS" />
+        <item
+            android:id="@+id/nav_share"
+            android:title="ABOUT US" />
+        <item
+            android:id="@+id/nav_send"
+            android:title="SETTING" />
+    </group>
+
+
+</menu>
