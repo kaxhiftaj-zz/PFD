@@ -15,6 +15,8 @@
     <string name="LongTextPizzaHutInfo">The simplest way to add Facebook Login to your app is to add LoginButton from the SDK. The LoginButton is a UI element that wraps functionality available in the LoginManager. When someone clicks on the button, the login is initiated with the permissions set in the LoginManager. The button follows the login state, and displays the correct text based on someone\'s authentication state</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="facebook_app_id">119269392093047</string>
+    <string name="fb_login_protocol_scheme">fb119269392093047</string>
 
     <string name="newPass"><font size="15">ENTER NEW PASSWORD</font></string>
 </resources>
