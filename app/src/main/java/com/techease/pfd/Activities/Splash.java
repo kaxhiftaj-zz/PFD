@@ -1,12 +1,14 @@
 package com.techease.pfd.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.techease.pfd.R;
 
 public class Splash extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class Splash extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
+
                     startActivity(new Intent(Splash.this, IntroActivity.class));
                     finish();
                 }

@@ -9,7 +9,7 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.techease.pfd.Fragments.EmailFrag;
+import com.techease.pfd.Fragments.LoginFrag;
 import com.techease.pfd.R;
 
 /**
@@ -89,7 +89,7 @@ public class FullscreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fullscreen);
 //        Uncomment this two lines to open fragment for saving services in database
         // you can move that code to the service activity too
-        Fragment fragment = new EmailFrag();
+        Fragment fragment = new LoginFrag();
         getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 // uncomment the below line and comment the above lines and run
 //        startActivity(new Intent(FullscreenActivity.this, ServiceActivity.class));

@@ -10,7 +10,7 @@
     android:layout_gravity="bottom"
     android:background="@drawable/introrectangle"/>
     <TextView
-        android:id="@+id/Resturents"
+        android:id="@+id/ResturentsTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RESTURENTS"

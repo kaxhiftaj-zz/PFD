@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:text="HOME"
+        android:id="@+id/HomeTag"
         android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="#fff"
@@ -25,6 +26,7 @@
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="165sp"/>
     <TextView
+        android:id="@+id/Intro3LongText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MANY PEOPLE UNDERSTAND THE CONCEPT OF PASSIVE SOLAR FOR HEATING A HOME. FEWER REALIZE IT CAN BE USED IN TO COOK FOOD AND STERILIZE WATER."

@@ -1,6 +1,7 @@
 package com.techease.pfd.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,11 +15,13 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
 
-public class Dashboard extends AppCompatActivity
+public class PFD extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Typeface typeface;
@@ -33,15 +36,19 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("PFD");
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerLayout = navigationView.getHeaderView(0);
 
         typeface=Typeface.createFromAsset(getAssets(), "font/brandon_blk.otf");
-        textView=(TextView)findViewById(R.id.tvUserName);
-        sharedprefs = this.getSharedPreferences("com.pdf", Context.MODE_PRIVATE);
+        textView=(TextView)headerLayout.findViewById(R.id.tvUserName);
+
+        sharedprefs = this.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedprefs.edit();
         name=sharedprefs.getString("name","");
         if (name!=null)
         {
-//            getHeader();
+            textView.setText(name);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -51,7 +58,7 @@ public class Dashboard extends AppCompatActivity
 
 
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         Menu menu=navigationView.getMenu();
         for (int i=0; i<menu.size(); i++)
         {
@@ -61,9 +68,7 @@ public class Dashboard extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void getHeader() {
-        textView.setText(name);
-    }
+
 
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "font/brandon_bld.otf");
@@ -97,7 +102,8 @@ public class Dashboard extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.logout) {
+            startActivity(new Intent(PFD.this, MainActivity.class));
             return true;
         }
 

@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -23,7 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.techease.pfd.Activities.Dashboard;
+import com.techease.pfd.Activities.PFD;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
 
@@ -51,7 +50,7 @@ public class SignUpFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
-        sharedPreferences = getActivity().getSharedPreferences("com.pfd", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/brandon_blk.otf");
         etUsernameSignUp = (EditText) view.findViewById(R.id.etUsernameSignUp);
@@ -78,7 +77,7 @@ public class SignUpFrag extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Fragment fragment = new EmailFrag();
+                Fragment fragment = new LoginFrag();
                 getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             }
         });
@@ -116,16 +115,13 @@ public class SignUpFrag extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response).getJSONObject("data");
                     String api_token=jsonObject.getString("api_token");
-                    String name=jsonObject.getString("username");
                     editor.putString("api_token",api_token);
-                    editor.putString("name",name);
                     editor.commit();
-                    Log.d("zma data",name);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                startActivity(new Intent(getActivity(), Dashboard.class));
+                startActivity(new Intent(getActivity(), PFD.class));
                 getActivity().finish();
 
             }

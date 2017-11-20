@@ -21,9 +21,9 @@ public class intro1 extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        typeface=Typeface.createFromAsset(getAssets(),"font/brandon_blk.otf");
-        typeface2=Typeface.createFromAsset(getAssets(),"font/brandon_bld.otf");
-        Resturents=(TextView)findViewById(R.id.Resturents);
+        typeface=Typeface.createFromAsset(getAssets(),"font/brandon_bld.otf");
+        typeface2=Typeface.createFromAsset(getAssets(),"font/brandon_reg.otf");
+        Resturents=(TextView)findViewById(R.id.ResturentsTag);
         Intro1LongText=(TextView)findViewById(R.id.intro1LongText);
         Resturents.setTypeface(typeface);
         Intro1LongText.setTypeface(typeface2);

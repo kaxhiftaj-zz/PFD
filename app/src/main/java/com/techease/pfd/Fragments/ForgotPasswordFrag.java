@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -68,14 +69,17 @@ String email;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Links.User_Url+"forgot-password", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("zma respoonse", response);
                 DialogUtils.sweetAlertDialog.dismiss();
+                Toast.makeText(getActivity(),"success", Toast.LENGTH_SHORT).show();
+
             }
+
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 DialogUtils.sweetAlertDialog.dismiss();
-                Log.d("zma error", String.valueOf(error.getCause()));
+                Toast.makeText(getActivity(), String.valueOf(error.getCause()), Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

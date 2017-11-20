@@ -22,7 +22,7 @@ public class intro2 extends Activity {
         super.onCreate(savedInstanceState);
 
         typeface=Typeface.createFromAsset(getAssets(),"font/barndon_bld.otf");
-        typeface2=Typeface.createFromAsset(getAssets(),"font/brandon_blk.otf");
+        typeface2=Typeface.createFromAsset(getAssets(),"font/brandon_reg.otf");
         Bistro=(TextView)findViewById(R.id.Bistro);
         longtext=(TextView)findViewById(R.id.intro2Longtext);
         Bistro.setTypeface(typeface);

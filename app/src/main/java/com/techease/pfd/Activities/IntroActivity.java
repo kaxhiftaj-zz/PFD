@@ -8,12 +8,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Fragments.SliderFragmanet;
 
 public class IntroActivity extends AppIntro {
-
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,15 @@ public class IntroActivity extends AppIntro {
 
         // Add your slide fragments here.
         // AppIntro will automatically generate the dots indicator and buttons.
+
+        sharedPreferences = getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String token=sharedPreferences.getString("api_token","");
+        if (!token.equals(""))
+        {
+            startActivity(new Intent(IntroActivity.this,PFD.class));
+            finish();
+        }
 
         addSlide(SliderFragmanet.newInstance(0));
         addSlide(SliderFragmanet.newInstance(1));
@@ -37,14 +47,7 @@ public class IntroActivity extends AppIntro {
         super.onDonePressed(currentFragment);
         // Do something when users tap on Done button.
 
-        sharedPreferences = this.getSharedPreferences("com.pdf", Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        String token=sharedPreferences.getString("api_token","");
-        if (!token.equals(""))
-        {
-            startActivity(new Intent(IntroActivity.this,Dashboard.class));
-            finish();
-        }
+
         Intent intent = new Intent(IntroActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

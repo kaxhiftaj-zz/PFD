@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btnFb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-        startActivity(new Intent(MainActivity.this,Dashboard.class));
+        startActivity(new Intent(MainActivity.this,PFD.class));
                 finish();
             }
         });

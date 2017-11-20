@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/loginbackpic"
-    tools:context="com.techease.pfd.Fragments.EmailFrag">
+    tools:context="com.techease.pfd.Fragments.LoginFrag">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
