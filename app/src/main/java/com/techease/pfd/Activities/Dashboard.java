@@ -1,5 +1,7 @@
 package com.techease.pfd.Activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +14,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.techease.pfd.R;
 
@@ -19,7 +22,10 @@ public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Typeface typeface;
-
+    TextView textView;
+    SharedPreferences sharedprefs;
+    SharedPreferences.Editor editor ;
+    String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +34,22 @@ public class Dashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        typeface=Typeface.createFromAsset(this.getAssets(), "brandon_bld.otf");
+        typeface=Typeface.createFromAsset(getAssets(), "font/brandon_blk.otf");
+        textView=(TextView)findViewById(R.id.tvUserName);
+        sharedprefs = this.getSharedPreferences("com.pdf", Context.MODE_PRIVATE);
+        editor = sharedprefs.edit();
+        name=sharedprefs.getString("name","");
+        if (name!=null)
+        {
+//            getHeader();
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         Menu menu=navigationView.getMenu();
@@ -44,6 +60,11 @@ public class Dashboard extends AppCompatActivity
         }
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    private void getHeader() {
+        textView.setText(name);
+    }
+
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "font/brandon_bld.otf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());

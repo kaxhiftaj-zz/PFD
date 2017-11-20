@@ -12,10 +12,12 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnFb,btnEmail;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         btnFb=(Button)findViewById(R.id.btnFb);
         btnFb.setOnClickListener(new View.OnClickListener() {
             @Override

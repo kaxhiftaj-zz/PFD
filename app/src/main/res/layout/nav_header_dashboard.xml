@@ -28,7 +28,7 @@
     android:layout_marginLeft="10sp"
     android:orientation="vertical">
     <TextView
-        android:id="@+id/textName"
+        android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -39,7 +39,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/textViewAddress"
+        android:id="@+id/tvAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#BDBDBD"

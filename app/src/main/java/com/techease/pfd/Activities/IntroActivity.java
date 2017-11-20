@@ -1,6 +1,8 @@
 package com.techease.pfd.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,9 @@ import com.github.paolorotolo.appintro.AppIntro;
 import com.techease.pfd.Fragments.SliderFragmanet;
 
 public class IntroActivity extends AppIntro {
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +30,21 @@ public class IntroActivity extends AppIntro {
 
 
 
-
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
         // Do something when users tap on Done button.
+
+        sharedPreferences = this.getSharedPreferences("com.pdf", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String token=sharedPreferences.getString("api_token","");
+        if (!token.equals(""))
+        {
+            startActivity(new Intent(IntroActivity.this,Dashboard.class));
+            finish();
+        }
         Intent intent = new Intent(IntroActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

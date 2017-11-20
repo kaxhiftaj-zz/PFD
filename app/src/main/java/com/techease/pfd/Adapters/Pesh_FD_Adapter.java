@@ -1,4 +1,4 @@
-package com.techease.pfd.Activities;
+package com.techease.pfd.Adapters;
 
 /**
  * Created by Adam Noor on 14-Nov-17.

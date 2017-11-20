@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -20,30 +19,34 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class SignUpFrag extends Fragment {
 
-    EditText etUsernameSignUp,etEmailSignUp,etPasswordSignUp;
+    EditText etUsernameSignUp, etEmailSignUp, etPasswordSignUp;
     TextView tvSignIn;
     Button btnSignUp;
     Typeface typeface;
-    String strUserName,strPassword,strEmail;
+    String strUserName, strPassword, strEmail;
+    String date = "2017-11-31";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_sign_up, container, false);
-        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
-        etUsernameSignUp=(EditText)view.findViewById(R.id.etUsernameSignUp);
-        etEmailSignUp=(EditText)view.findViewById(R.id.etEmailSignUp);
-        etPasswordSignUp=(EditText)view.findViewById(R.id.etPasswordSignUp);
-        tvSignIn=(TextView)view.findViewById(R.id.tvSignInSignUp);
-        btnSignUp=(Button)view.findViewById(R.id.btnSignUp);
+        View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/brandon_blk.otf");
+        etUsernameSignUp = (EditText) view.findViewById(R.id.etUsernameSignUp);
+        etEmailSignUp = (EditText) view.findViewById(R.id.etEmailSignUp);
+        etPasswordSignUp = (EditText) view.findViewById(R.id.etPasswordSignUp);
+        tvSignIn = (TextView) view.findViewById(R.id.tvSignInSignUp);
+        btnSignUp = (Button) view.findViewById(R.id.btnSignUp);
 
         btnSignUp.setTypeface(typeface);
         etPasswordSignUp.setTypeface(typeface);
@@ -63,13 +66,14 @@ public class SignUpFrag extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Fragment fragment=new EmailFrag();
-                getFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+                Fragment fragment = new EmailFrag();
+                getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
             }
         });
 
         return view;
     }
+
     public void onDataInput() {
         strUserName = etUsernameSignUp.getText().toString();
         strEmail = etEmailSignUp.getText().toString();
@@ -79,8 +83,11 @@ public class SignUpFrag extends Fragment {
             etUsernameSignUp.setError("Enter a valid First name");
         } else if ((!android.util.Patterns.EMAIL_ADDRESS.matcher(strEmail).matches())) {
             etEmailSignUp.setError("Please enter valid email id");
-        } else {
-            Log.d("zma data", strUserName+"\n"+strEmail+"\n"+"\n");
+        }else if(strPassword.equals("")||strPassword.length()<6)
+        {
+            etPasswordSignUp.setError("Enter the more then 6 digit passowrd");
+        }
+        else {
             DialogUtils.showProgressSweetDialog(getActivity(), "Getting registered");
             apiCall();
 
@@ -90,39 +97,17 @@ public class SignUpFrag extends Fragment {
     }
 
     private void apiCall() {
-        final StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://pfd.techeasesol.com/api/v1/user/register", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Links.User_Url+"register", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("zma  reg response", String.valueOf(response));
+            Log.d("zma respoonse", response);
                 DialogUtils.sweetAlertDialog.dismiss();
-                if (response.contains("User successfully registered")) {
-
-//                    try {
-////                        JSONObject jsonObject = new JSONObject(String.valueOf(response)).getJSONObject("data");
-////                        String strApiToken = jsonObject.getString("api_token");
-//                        //Toast.makeText(getActivity(), strApiToken, Toast.LENGTH_SHORT).show();
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-                    Toast.makeText(getActivity(), "Registration Successful", Toast.LENGTH_SHORT).show();
-                    //fragment = new LoginFragment();
-                    //getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-
-
-                } else {
-                    DialogUtils.showWarningAlertDialog(getActivity(), "Something went wrong");
-                }
             }
-
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("zma error", String.valueOf(error));
                 DialogUtils.sweetAlertDialog.dismiss();
-                DialogUtils.showWarningAlertDialog(getActivity(),"Error");
-
-
+                Log.d("zma error", String.valueOf(error.getCause()));
             }
         }) {
             @Override
@@ -136,18 +121,31 @@ public class SignUpFrag extends Fragment {
                 params.put("username", strUserName);
                 params.put("email", strEmail);
                 params.put("password", strPassword);
-                params.put("dob", "2017-11-31");
+                params.put("dob", date);
                 params.put("Accept", "application/json");
                 Log.d("zma params", String.valueOf(params));
-                return params;
+                return checkParams(params);
             }
-
         };
+
         RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(200000,
+        stringRequest.setRetryPolicy(new
+
+                DefaultRetryPolicy(200000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(stringRequest);
+
+    }
+    private Map<String, String> checkParams(Map<String, String> map){
+        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();
+            if(pairs.getValue()==null){
+                map.put(pairs.getKey(), "");
+            }
+        }
+        return map;
     }
 
 }
