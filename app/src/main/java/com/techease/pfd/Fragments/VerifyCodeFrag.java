@@ -41,8 +41,8 @@ public class VerifyCodeFrag extends Fragment {
         etVerifyCode=(EditText)view.findViewById(R.id.etVerifyCode);
         btnVerify=(Button)view.findViewById(R.id.btnVerify);
 
-        etVerifyCode.setTypeface(Links.typeface);
-        btnVerify.setTypeface(Links.typeface);
+        etVerifyCode.setTypeface(typeface);
+        btnVerify.setTypeface(typeface);
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,9 @@
 package com.techease.pfd.Fragments;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -19,8 +23,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.techease.pfd.Activities.Dashboard;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,6 +41,8 @@ public class SignUpFrag extends Fragment {
     Button btnSignUp;
     Typeface typeface;
     String strUserName, strPassword, strEmail;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     String date = "2017-11-31";
 
 
@@ -41,6 +51,8 @@ public class SignUpFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        sharedPreferences = getActivity().getSharedPreferences("com.pfd", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/brandon_blk.otf");
         etUsernameSignUp = (EditText) view.findViewById(R.id.etUsernameSignUp);
         etEmailSignUp = (EditText) view.findViewById(R.id.etEmailSignUp);
@@ -100,8 +112,22 @@ public class SignUpFrag extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Links.User_Url+"register", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-            Log.d("zma respoonse", response);
                 DialogUtils.sweetAlertDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(response).getJSONObject("data");
+                    String api_token=jsonObject.getString("api_token");
+                    String name=jsonObject.getString("username");
+                    editor.putString("api_token",api_token);
+                    editor.putString("name",name);
+                    editor.commit();
+                    Log.d("zma data",name);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                startActivity(new Intent(getActivity(), Dashboard.class));
+                getActivity().finish();
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -121,9 +147,8 @@ public class SignUpFrag extends Fragment {
                 params.put("username", strUserName);
                 params.put("email", strEmail);
                 params.put("password", strPassword);
-                params.put("dob", date);
+                params.put("dob", "1991-12-27");
                 params.put("Accept", "application/json");
-                Log.d("zma params", String.valueOf(params));
                 return checkParams(params);
             }
         };
