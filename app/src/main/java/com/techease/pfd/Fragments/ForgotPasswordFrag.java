@@ -41,7 +41,7 @@ String email;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_forgot_password, container, false);
-        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
+        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         etEmailForgetPass=(EditText)view.findViewById(R.id.etEmailForgetPass);
         btnSendForgetPass=(Button)view.findViewById(R.id.btnSendForgetPass);
 

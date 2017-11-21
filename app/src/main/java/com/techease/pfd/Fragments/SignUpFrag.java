@@ -55,7 +55,7 @@ public class SignUpFrag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/brandon_blk.otf");
+        typeface = Typeface.createFromAsset(getActivity().getAssets(), "font/brandon_reg.otf");
         etUsernameSignUp = (EditText) view.findViewById(R.id.etUsernameSignUp);
         etEmailSignUp = (EditText) view.findViewById(R.id.etEmailSignUp);
         etPasswordSignUp = (EditText) view.findViewById(R.id.etPasswordSignUp);

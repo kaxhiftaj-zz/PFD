@@ -44,7 +44,7 @@ public class ResetPassFrag extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_reset_pass, container, false);
 
-        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
+        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         etNewPass=(EditText)view.findViewById(R.id.etNewPassRestPass);
         etReEnterPass=(EditText)view.findViewById(R.id.etReEnterPassRestPass);
         btnReset=(Button)view.findViewById(R.id.btnReset);

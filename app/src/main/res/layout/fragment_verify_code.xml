@@ -54,7 +54,7 @@
                     android:hint="ENTER CODE"
                     android:textColor="#fff"
                     android:padding="10sp"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     android:textColorHint="#fff"
                     android:background="@drawable/btnripple"
                     android:layout_gravity="center"

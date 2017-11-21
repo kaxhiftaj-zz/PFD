@@ -40,7 +40,7 @@ public class VerifyCodeFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_verify_code, container, false);
-        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
+        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         etVerifyCode=(EditText)view.findViewById(R.id.etVerifyCode);
         btnVerify=(Button)view.findViewById(R.id.btnVerify);
 
