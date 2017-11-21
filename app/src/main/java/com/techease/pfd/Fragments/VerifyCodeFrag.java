@@ -1,8 +1,9 @@
 package com.techease.pfd.Fragments;
 
+import android.app.Fragment;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,12 +26,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class VerifyCodeFrag extends Fragment {
 
     EditText etVerifyCode;
     Button btnVerify;
     Typeface typeface;
-    String code;
+    String code,email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +46,9 @@ public class VerifyCodeFrag extends Fragment {
 
         etVerifyCode.setTypeface(typeface);
         btnVerify.setTypeface(typeface);
+        Bundle bundle=getArguments();
+        email=bundle.getString("email");
+
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +66,7 @@ onDataInput();
             etVerifyCode.setError("Please enter the code");
         }
         else
-            DialogUtils.showProgressSweetDialog(getActivity(), "Getting registered");
+            DialogUtils.showProgressSweetDialog(getActivity(), "Verifying");
         apiCall();
 
     }
@@ -71,11 +77,27 @@ onDataInput();
             public void onResponse(String response) {
                 Log.d("zma respoonse", response);
                 DialogUtils.sweetAlertDialog.dismiss();
+
+                Fragment fragment= new ResetPassFrag();
+                getFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 DialogUtils.sweetAlertDialog.dismiss();
+
+                    final SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                    pDialog.getProgressHelper().setBarColor(Color.parseColor("#295786"));
+                    pDialog.setTitleText("Invalid verification code");
+                    pDialog.setConfirmText("OK");
+                    pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                        @Override
+                        public void onClick(SweetAlertDialog sweetAlertDialog) {
+                            pDialog.dismissWithAnimation();
+                        }
+                    });
+                    pDialog.show();
+
                 Log.d("zma error", String.valueOf(error.getCause()));
             }
         }) {
@@ -87,7 +109,8 @@ onDataInput();
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("code", code);
+                params.put("verification_code", code);
+                params.put("email",email);
                 return checkParams(params);
             }
         };

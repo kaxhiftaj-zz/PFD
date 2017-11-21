@@ -1,15 +1,15 @@
 package com.techease.pfd.Fragments;
 
+import android.app.Fragment;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -26,12 +26,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class ForgotPasswordFrag extends Fragment {
 
     EditText etEmailForgetPass;
     Button btnSendForgetPass;
     Typeface typeface;
+    Fragment fragment;
 String email;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +63,7 @@ String email;
         {
             etEmailForgetPass.setError("Please Enter Valid Email");
         }else
-            DialogUtils.showProgressSweetDialog(getActivity(), "Loading");
+            DialogUtils.showProgressSweetDialog(getActivity(), "Sending");
         apiCall();
 
     }
@@ -70,7 +73,11 @@ String email;
             @Override
             public void onResponse(String response) {
                 DialogUtils.sweetAlertDialog.dismiss();
-                Toast.makeText(getActivity(),"success", Toast.LENGTH_SHORT).show();
+                Bundle bundle=new Bundle();
+                bundle.putString("email",email);
+                fragment=new VerifyCodeFrag();
+                getFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+                fragment.setArguments(bundle);
 
             }
 
@@ -79,7 +86,17 @@ String email;
             @Override
             public void onErrorResponse(VolleyError error) {
                 DialogUtils.sweetAlertDialog.dismiss();
-                Toast.makeText(getActivity(), String.valueOf(error.getCause()), Toast.LENGTH_SHORT).show();
+                final SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#295786"));
+                pDialog.setTitleText("Please provide a valid Email");
+                pDialog.setConfirmText("OK");
+                pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        pDialog.dismissWithAnimation();
+                    }
+                });
+                pDialog.show();
             }
         }) {
             @Override

@@ -64,7 +64,7 @@
             android:id="@+id/etPassword"
             android:layout_width="260sp"
             android:layout_height="50sp"
-            android:hint="PASSWORD"
+            android:hint="Password"
             android:textColorHint="#fff"
             android:textColor="#fff"
             android:textSize="15sp"

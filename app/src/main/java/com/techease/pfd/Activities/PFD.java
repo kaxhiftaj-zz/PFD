@@ -104,6 +104,7 @@ public class PFD extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
             startActivity(new Intent(PFD.this, MainActivity.class));
+            finish();
             return true;
         }
 

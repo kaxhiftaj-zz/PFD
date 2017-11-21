@@ -80,7 +80,7 @@
                     android:layout_width="260sp"
                     android:layout_height="50sp"
                     android:textSize="15sp"
-                    android:hint="PASSWORD"
+                    android:hint="Password"
                     android:textColorHint="#fff"
                     android:textColor="#fff"
                     android:padding="10sp"

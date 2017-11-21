@@ -1,5 +1,8 @@
 package com.techease.pfd.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -25,12 +28,16 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class ResetPassFrag extends Fragment {
 
     Typeface typeface;
     EditText etNewPass,etReEnterPass;
     Button btnReset;
-    String Pass,RePass;
+    String Pass,RePass,api_token;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +52,11 @@ public class ResetPassFrag extends Fragment {
         etReEnterPass.setTypeface(typeface);
         etNewPass.setTypeface(typeface);
         btnReset.setTypeface(typeface);
+
+        sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        api_token=sharedPreferences.getString("api_token","");
+
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +79,7 @@ public class ResetPassFrag extends Fragment {
             etReEnterPass.setError("Password does not match");
         }
         else
-            DialogUtils.showProgressSweetDialog(getActivity(), "Getting registered");
+            DialogUtils.showProgressSweetDialog(getActivity(), "Loading");
         apiCall();
     }
 
@@ -77,11 +89,24 @@ public class ResetPassFrag extends Fragment {
             public void onResponse(String response) {
                 Log.d("zma respoonse", response);
                 DialogUtils.sweetAlertDialog.dismiss();
+                Fragment fragment=new LoginFrag();
+                getFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 DialogUtils.sweetAlertDialog.dismiss();
+                final SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#295786"));
+                pDialog.setTitleText("Unauthenticated");
+                pDialog.setConfirmText("OK");
+                pDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        pDialog.dismissWithAnimation();
+                    }
+                });
+                pDialog.show();
                 Log.d("zma error", String.valueOf(error.getCause()));
             }
         }) {
@@ -93,8 +118,9 @@ public class ResetPassFrag extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("pass", Pass);
-                params.put("newPass", RePass);
+                params.put("api_token",api_token);
+                params.put("password", Pass);
+                params.put("password_confirmation", RePass);
                 Log.d("zma params", String.valueOf(params));
                 return checkParams(params);
             }

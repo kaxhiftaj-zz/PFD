@@ -58,7 +58,7 @@
                     android:textColorHint="#fff"
                     android:background="@drawable/btnripple"
                     android:layout_gravity="center"
-                    android:inputType="textEmailAddress"
+                    android:inputType="number"
                     />
                 <Button
                     android:id="@+id/btnVerify"
