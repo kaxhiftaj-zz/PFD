@@ -27,5 +27,6 @@ public class intro1 extends Activity {
         Intro1LongText=(TextView)findViewById(R.id.intro1LongText);
         Resturents.setTypeface(typeface);
         Intro1LongText.setTypeface(typeface2);
+        
     }
 }

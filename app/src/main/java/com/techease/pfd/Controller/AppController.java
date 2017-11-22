@@ -60,7 +60,6 @@ public class AppController extends Application {
 
     public static void toast(String message, int length) {
         Toast t = Toast.makeText(getInstance(), message, length);
-        // t.setGravity(Gravity.CENTER, 0, 0);
         t.show();
     }
 
