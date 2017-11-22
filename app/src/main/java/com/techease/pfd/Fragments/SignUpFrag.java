@@ -119,8 +119,8 @@ public class SignUpFrag extends Fragment {
                     JSONObject jsonObject = new JSONObject(response).getJSONObject("data");
                     String api_token=jsonObject.getString("api_token");
                     editor.putString("api_token",api_token);
+                    editor.putString("name",etUsernameSignUp.getText().toString());
                     editor.commit();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -155,10 +155,12 @@ public class SignUpFrag extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username", strUserName);
+                params.put("name", strUserName);
                 params.put("email", strEmail);
                 params.put("password", strPassword);
-                params.put("dob", "1991-12-27");
+//                params.put("dob", "1991-12-27");
+                params.put("device_type","Android");
+                params.put("device_token","token_here");
                 params.put("Accept", "application/json");
                 return checkParams(params);
             }

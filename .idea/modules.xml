@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/PFD.iml" filepath="$PROJECT_DIR$/PFD.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PFD-master.iml" filepath="$PROJECT_DIR$/PFD-master.iml" />
+      <module fileurl="file://E:\AndroidProjects\PFD\PFD-master.iml" filepath="E:\AndroidProjects\PFD\PFD-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
