@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
                             public void onCompleted(JSONObject object, GraphResponse response) {
                                 Log.i("LoginActivity", response.toString());
                                 // Get facebook data from login
+                                editor.putString("token",provider_id);
+                                editor.commit();
                                 startActivity(new Intent(MainActivity.this,PFD.class));
                             }
                         });

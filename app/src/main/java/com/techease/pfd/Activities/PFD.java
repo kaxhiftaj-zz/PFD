@@ -56,8 +56,8 @@ public class PFD extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-
-
+        startActivity(new Intent(PFD.this,GraphActivity.class));
+        finish();
 
         Menu menu=navigationView.getMenu();
         for (int i=0; i<menu.size(); i++)
