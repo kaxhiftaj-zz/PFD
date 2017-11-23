@@ -19,6 +19,8 @@ public class GraphActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
 
+        textView = (TextView)findViewById(R.id.tvid);
+
         GraphRequest request = GraphRequest.newGraphPathRequest(
                 AccessToken.getCurrentAccessToken(),
                 "/477220989332453/feed",

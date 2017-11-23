@@ -8,7 +8,7 @@
     tools:context="com.techease.pfd.Activities.GraphActivity">
 
     <TextView
-        android:id="@+id/tvGraph"
+        android:id="@+id/tvid"
         android:layout_width="match_parent"
         android:layout_height="300sp"
         android:layout_gravity="center"
