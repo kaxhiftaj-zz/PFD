@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private LoginButton FBloginButton;
     CallbackManager callbackManager;
     String provider_id,email,name,provider,device_type,device_token;
+    String id,story;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
@@ -56,11 +57,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this,"device token"+ android_id, Toast.LENGTH_SHORT).show();
         sharedPreferences = this.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-
         device_type="Android";
         device_token=android_id;
         callbackManager = CallbackManager.Factory.create();
         FBloginButton=(LoginButton) findViewById(R.id.btnFb);
+        FBloginButton.setHeight(100);
         FBloginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
                                 // Get facebook data from login
                                 editor.putString("token",provider_id);
                                 editor.commit();
+                                try {
+                                    id=object.getString("id");
+                                    Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 startActivity(new Intent(MainActivity.this,PFD.class));
                             }
                         });
