@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.techease.pfd.Configuration.Links;
+import com.techease.pfd.Fragments.Pesh_FD;
 import com.techease.pfd.R;
 
 public class PFD extends AppCompatActivity
@@ -28,9 +29,10 @@ public class PFD extends AppCompatActivity
     Typeface typeface;
     TextView textView;
     SharedPreferences sharedprefs;
-    SharedPreferences.Editor editor ;
+    SharedPreferences.Editor editor;
     String name;
     Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,19 +43,18 @@ public class PFD extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout = navigationView.getHeaderView(0);
 
-        typeface=Typeface.createFromAsset(getAssets(), "font/brandon_blk.otf");
-        textView=(TextView)headerLayout.findViewById(R.id.tvUserName);
+        typeface = Typeface.createFromAsset(getAssets(), "font/brandon_blk.otf");
+        textView = (TextView) headerLayout.findViewById(R.id.tvUserName);
 
         sharedprefs = this.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedprefs.edit();
-        name=sharedprefs.getString("name","");
-        if (name!=null)
-        {
+        name = sharedprefs.getString("name", "");
+        if (name != null) {
             textView.setText(name);
         }
 
-//        fragment=new GraphFrag();
-//        getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+        fragment = new Pesh_FD();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,25 +62,23 @@ public class PFD extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-       startActivity(new Intent(PFD.this,GraphActivity.class));
-        finish();
+//       startActivity(new Intent(PFD.this,GraphActivity.class));
+//        finish();
 
 
-        Menu menu=navigationView.getMenu();
-        for (int i=0; i<menu.size(); i++)
-        {
-            MenuItem menuItem=menu.getItem(i);
+        Menu menu = navigationView.getMenu();
+        for (int i = 0; i < menu.size(); i++) {
+            MenuItem menuItem = menu.getItem(i);
             applyFontToMenuItem(menuItem);
         }
         navigationView.setNavigationItemSelectedListener(this);
     }
 
 
-
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "font/brandon_bld.otf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
 

@@ -33,10 +33,9 @@ public class GraphActivity extends AppCompatActivity {
         setContentView(R.layout.activity_graph);
 
         recyclerView=(RecyclerView)findViewById(R.id.tvGraph);
+        graphAdapter=new GraphAdapter(this, models);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         models=new ArrayList<>();
-        graphAdapter=new GraphAdapter(this, models);
-        recyclerView.setAdapter(graphAdapter);
 
         GraphRequest request = GraphRequest.newGraphPathRequest(
                 AccessToken.getCurrentAccessToken(),
@@ -49,8 +48,14 @@ public class GraphActivity extends AppCompatActivity {
                         try {
                             for(int i=0;i<response.getJSONObject().getJSONArray("data").length();i++){
                                 JSONObject post = response.getJSONObject().getJSONArray("data").getJSONObject(i);
+                                GraphModel graphModel=new GraphModel();
+                                graphModel.setStory(post.getString("story"));
+                                graphModel.setUpdated_time(post.getString("updated_time"));
+                                graphModel.setId(post.getString("id"));
+                                models.add(graphModel);
 
                             }
+                            graphAdapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -62,5 +67,8 @@ public class GraphActivity extends AppCompatActivity {
         parameters.putString("limit", "20");
         request.setParameters(parameters);
         request.executeAsync();
+
+        recyclerView.setAdapter(graphAdapter);
+
     }
 }

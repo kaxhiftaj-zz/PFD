@@ -9,13 +9,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Story"
+        android:layout_marginTop="10sp"
         android:textSize="20sp"
+        android:layout_marginLeft="10sp"
         android:id="@+id/tvStory"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="UpdatedTime"
         android:id="@+id/tvUpdated"
+        android:layout_marginTop="10sp"
+        android:layout_marginLeft="10sp"
         android:textSize="20sp"
         />
     <TextView
@@ -23,6 +27,8 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:text="Id"
+        android:layout_marginLeft="10sp"
+        android:layout_marginTop="10sp"
         android:id="@+id/tvId"/>
 
 </LinearLayout>

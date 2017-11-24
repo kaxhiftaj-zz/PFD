@@ -19,4 +19,5 @@
     <string name="fb_login_protocol_scheme">fb119269392093047</string>
 
     <string name="newPass"><font size="15">ENTER NEW PASSWORD</font></string>
+    <string name="graph">Graph</string>
 </resources>

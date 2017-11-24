@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="50sp"
     android:text="Search"
-    android:textColor="#eee"
+    android:textColor="#295786"
     android:background="#eee"
     android:layout_marginLeft="10sp"
     android:layout_marginRight="10sp"

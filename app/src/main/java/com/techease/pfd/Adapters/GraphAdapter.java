@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.techease.pfd.Controller.GraphModel;
 import com.techease.pfd.R;
@@ -35,7 +36,10 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final
+        final GraphModel data=Gmodels.get(position);
+        holder.story.setText(data.getStory());
+        holder.time.setText(data.getUpdated_time());
+        holder.id.setText(data.getId());
 
     }
 
@@ -43,12 +47,17 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return Gmodels.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView story,time,id;
         public MyViewHolder(View itemView) {
+
             super(itemView);
+            story=(TextView)itemView.findViewById(R.id.tvStory);
+            time=(TextView)itemView.findViewById(R.id.tvUpdated);
+            id=(TextView)itemView.findViewById(R.id.tvId);
         }
     }
 }
