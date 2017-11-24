@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#fff"
     android:padding="10sp"
@@ -9,11 +10,12 @@
 <SearchView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Search"
     android:textColor="#295786"
-    android:background="#eee"
+    android:background="@drawable/searchviewback"
     android:queryHint="Search Here"
+    android:gravity="right"
     android:layout_marginLeft="10sp"
+    android:searchIcon="@drawable/target"
     android:layout_marginRight="10sp"
     android:alpha="0.3"
     android:id="@+id/sv"/>

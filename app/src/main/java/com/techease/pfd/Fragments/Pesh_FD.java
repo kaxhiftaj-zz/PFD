@@ -36,17 +36,21 @@ import java.util.Map;
 
 public class Pesh_FD extends Fragment {
 
+    android.widget.SearchView searchView;
     RecyclerView recyclerView;
     List<Pesh_FD_Model> PFDmodels;
     Pesh_FD_Adapter pesh_fd_adapter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-String api_token;
+    String api_token;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_pfd, container, false);
+        searchView=(android.widget.SearchView) view.findViewById(R.id.sv);
+        searchView.setQueryHint("Search Here");
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         api_token=sharedPreferences.getString("api_token","");
