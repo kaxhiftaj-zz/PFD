@@ -1,4 +1,4 @@
-package com.techease.pfd.Activities;
+package com.techease.pfd.Activities.Intro;
 
 import android.app.Activity;
 import android.graphics.Typeface;

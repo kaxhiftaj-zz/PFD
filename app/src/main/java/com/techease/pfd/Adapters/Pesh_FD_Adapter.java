@@ -1,8 +1,10 @@
 package com.techease.pfd.Adapters;
 
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Controller.Pesh_FD_Model;
+import com.techease.pfd.Fragments.Pesh_FD_Details;
 import com.techease.pfd.R;
 
 import java.util.List;
@@ -44,9 +47,9 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         holder.RestName.setText(peshFdModel.getRestName());
         holder.TvAllRestId.setText(peshFdModel.getId());
         holder.Image_Url=peshFdModel.getImageUrl();
+        holder.id=peshFdModel.getId();
+        holder.editor.putString("Rest_id",peshFdModel.getId());
         Glide.with(context).load(holder.Image_Url).into(holder.imageView);
-
-
     }
 
 
@@ -56,12 +59,12 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         return pesh_fd_models.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageView;
         TextView RestName,TvAllRestId;
         SharedPreferences sharedPreferences;
         SharedPreferences.Editor editor;
-        String api_token,Image_Url;
+        String api_token,Image_Url,id;
         Typeface typeface,typeface2;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +79,18 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
             RestName.setTypeface(typeface);
             TvAllRestId.setTypeface(typeface);
 
+            imageView.setOnClickListener(this);
+            RestName.setOnClickListener(this);
+            TvAllRestId.setOnClickListener(this);
+
+
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Fragment fragment=new Pesh_FD_Details();
+            ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
         }
     }
 }

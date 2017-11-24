@@ -24,7 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.techease.pfd.Activities.PFD;
+import com.techease.pfd.Activities.Dashboard;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
 
@@ -128,7 +128,7 @@ public class LoginFrag extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                startActivity(new Intent(getActivity(), PFD.class));
+                startActivity(new Intent(getActivity(), Dashboard.class));
                 getActivity().finish();
             }
         }, new Response.ErrorListener() {

@@ -1,12 +1,15 @@
 package com.techease.pfd.Adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.techease.pfd.Controller.GraphModel;
 import com.techease.pfd.R;
 
@@ -37,10 +40,10 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final GraphModel data=Gmodels.get(position);
-        holder.story.setText(data.getStory());
-        holder.time.setText(data.getUpdated_time());
-        holder.id.setText(data.getId());
-
+        holder.PostStory.setText(data.getStory());
+        holder.PostMessage.setText(data.getPostMessage());
+        holder.PostName.setText(data.getPostName());
+        Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
     }
 
 
@@ -51,13 +54,23 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView story,time,id;
+        TextView PostStory,PostName,PostMessage;
+        ImageView imageView;
+        Typeface typeface,typeface2;
         public MyViewHolder(View itemView) {
 
             super(itemView);
-            story=(TextView)itemView.findViewById(R.id.tvStory);
-            time=(TextView)itemView.findViewById(R.id.tvUpdated);
-            id=(TextView)itemView.findViewById(R.id.tvId);
+            PostStory=(TextView)itemView.findViewById(R.id.tvStory);
+            PostName=(TextView)itemView.findViewById(R.id.PostName);
+            PostMessage=(TextView)itemView.findViewById(R.id.tvPostMessage);
+            imageView=(ImageView)itemView.findViewById(R.id.ivPostPic);
+            typeface=Typeface.createFromAsset(context.getAssets(),"font/brandon_bld.otf");
+            typeface2=Typeface.createFromAsset(context.getAssets(),"font/brandon_reg.otf");
+            PostName.setTypeface(typeface);
+            PostMessage.setTypeface(typeface2);
+            PostStory.setTypeface(typeface);
+
         }
+
     }
 }

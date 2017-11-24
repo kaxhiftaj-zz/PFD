@@ -20,10 +20,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.techease.pfd.Configuration.Links;
+import com.techease.pfd.Fragments.FbGraphFrag;
 import com.techease.pfd.Fragments.Pesh_FD;
 import com.techease.pfd.R;
 
-public class PFD extends AppCompatActivity
+public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Typeface typeface;
@@ -39,7 +40,7 @@ public class PFD extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("PFD");
+        toolbar.setTitle("Dashboard");
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerLayout = navigationView.getHeaderView(0);
 
@@ -62,8 +63,6 @@ public class PFD extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-//       startActivity(new Intent(PFD.this,GraphActivity.class));
-//        finish();
 
 
         Menu menu = navigationView.getMenu();
@@ -108,7 +107,7 @@ public class PFD extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
-            startActivity(new Intent(PFD.this, MainActivity.class));
+            startActivity(new Intent(Dashboard.this, MainActivity.class));
             finish();
             return true;
         }
@@ -124,9 +123,7 @@ public class PFD extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
+        }  else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {
 
@@ -134,6 +131,10 @@ public class PFD extends AppCompatActivity
 
         } else if (id == R.id.nav_send) {
 
+        }else if (id==R.id.nav_FbGraph)
+        {
+       Fragment fragmentGraph=new FbGraphFrag();
+       getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentGraph).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

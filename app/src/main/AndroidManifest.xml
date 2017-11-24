@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.IntroActivity"
+            android:name=".Activities.Intro.IntroActivity"
             android:theme="@style/Full" />
         <activity
             android:name=".Activities.Splash"
@@ -48,18 +48,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.PFD"
+            android:name=".Activities.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activities.intro1"
+            android:name=".Activities.Intro.intro1"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.FullscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_fullscreen"
             android:theme="@style/FullscreenTheme" />
-        <activity android:name=".Activities.GraphActivity"></activity>
     </application>
 
 </manifest>

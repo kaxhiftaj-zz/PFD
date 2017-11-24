@@ -1,4 +1,4 @@
-package com.techease.pfd.Configuration;
+package com.techease.pfd.Utils;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

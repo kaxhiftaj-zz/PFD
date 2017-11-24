@@ -26,7 +26,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.techease.pfd.Configuration.DialogUtils;
+import com.techease.pfd.Utils.DialogUtils;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
 
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
 
-        Toast.makeText(this,"device token"+ android_id, Toast.LENGTH_SHORT).show();
         sharedPreferences = this.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         device_type="Android";
@@ -84,11 +83,10 @@ public class MainActivity extends AppCompatActivity {
                                 editor.commit();
                                 try {
                                     id=object.getString("id");
-                                    Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                startActivity(new Intent(MainActivity.this,PFD.class));
+                                startActivity(new Intent(MainActivity.this,Dashboard.class));
                             }
                         });
                         Bundle parameters = new Bundle();
@@ -151,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    startActivity(new Intent(MainActivity.this, PFD.class));
+                    startActivity(new Intent(MainActivity.this, Dashboard.class));
 
                 } else   {
                     DialogUtils.showWarningAlertDialog(MainActivity.this, "Something went wrong");

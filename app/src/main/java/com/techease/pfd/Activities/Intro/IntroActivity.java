@@ -1,4 +1,4 @@
-package com.techease.pfd.Activities;
+package com.techease.pfd.Activities.Intro;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.github.paolorotolo.appintro.AppIntro;
+import com.techease.pfd.Activities.MainActivity;
+import com.techease.pfd.Activities.Dashboard;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Fragments.SliderFragmanet;
 
@@ -30,11 +32,11 @@ public class IntroActivity extends AppIntro {
         String FbToken=sharedPreferences.getString("token","");
         if (!token.equals(""))
         {
-            startActivity(new Intent(IntroActivity.this,PFD.class));
+            startActivity(new Intent(IntroActivity.this,Dashboard.class));
             finish();
         }else if(!FbToken.equals(""))
         {
-            startActivity(new Intent(IntroActivity.this,PFD.class));
+            startActivity(new Intent(IntroActivity.this,Dashboard.class));
             finish();
         }
 

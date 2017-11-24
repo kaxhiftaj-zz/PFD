@@ -6,14 +6,15 @@
             android:id="@+id/nav_camera"
             android:title="PFD" />
         <item
-            android:id="@+id/nav_gallery"
-            android:title="FACEBOOK POST" />
+            android:id="@+id/nav_FbGraph"
+            android:title="Graph"/>
         <item
             android:id="@+id/nav_slideshow"
             android:title="BEST DEALS" />
         <item
             android:id="@+id/nav_manage"
             android:title="COUPANS" />
+
         <item
             android:id="@+id/nav_share"
             android:title="ABOUT US" />

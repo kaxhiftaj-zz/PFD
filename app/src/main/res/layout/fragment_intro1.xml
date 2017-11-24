@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/introback1"
-    tools:context="com.techease.pfd.Activities.intro1">
+    tools:context=".Activities.Intro.intro1">
 <ImageView
     android:layout_width="wrap_content"
     android:layout_height="250sp"

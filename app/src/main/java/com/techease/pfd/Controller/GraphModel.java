@@ -7,9 +7,35 @@ package com.techease.pfd.Controller;
 public class GraphModel {
 
     private String Story;
-    private String id;
-    private String updated_time;
+    private String PostName;
+    private String PostMessage;
+    private String ImageUrl;
 
+    public String getPostName() {
+        return PostName;
+    }
+
+    public void setPostName(String postName) {
+        PostName = postName;
+    }
+
+
+
+    public String getPostMessage() {
+        return PostMessage;
+    }
+
+    public void setPostMessage(String postMessage) {
+        PostMessage = postMessage;
+    }
+
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 
     public String getStory() {
         return Story;
@@ -19,21 +45,6 @@ public class GraphModel {
         Story = story;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUpdated_time() {
-        return updated_time;
-    }
-
-    public void setUpdated_time(String updated_time) {
-        this.updated_time = updated_time;
-    }
 
 
 }

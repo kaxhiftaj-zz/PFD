@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.techease.pfd.Activities.Intro.IntroActivity;
 import com.techease.pfd.R;
 
 public class Splash extends AppCompatActivity {
