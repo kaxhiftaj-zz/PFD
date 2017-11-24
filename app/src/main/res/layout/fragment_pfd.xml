@@ -8,10 +8,11 @@
     tools:context="com.techease.pfd.Fragments.Pesh_FD">
 <SearchView
     android:layout_width="match_parent"
-    android:layout_height="50sp"
+    android:layout_height="wrap_content"
     android:text="Search"
     android:textColor="#295786"
     android:background="#eee"
+    android:queryHint="Search Here"
     android:layout_marginLeft="10sp"
     android:layout_marginRight="10sp"
     android:alpha="0.3"

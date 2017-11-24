@@ -2,6 +2,7 @@ package com.techease.pfd.Adapters;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,8 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         final Pesh_FD_Model peshFdModel=pesh_fd_models.get(position);
         holder.RestName.setText(peshFdModel.getRestName());
         holder.TvAllRestId.setText(peshFdModel.getId());
-        Glide.with(context).load("http://pfd.techeasesol.com/api/v1/resturants?api_token="+holder.api_token).into(holder.imageView);
+        holder.Image_Url=peshFdModel.getImageUrl();
+        Glide.with(context).load(holder.Image_Url).into(holder.imageView);
 
 
     }
@@ -59,7 +61,8 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         TextView RestName,TvAllRestId;
         SharedPreferences sharedPreferences;
         SharedPreferences.Editor editor;
-        String api_token;
+        String api_token,Image_Url;
+        Typeface typeface,typeface2;
         public MyViewHolder(View itemView) {
             super(itemView);
             sharedPreferences = context.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
@@ -68,6 +71,11 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
             imageView=(ImageView)itemView.findViewById(R.id.ivPesh_FD);
             RestName=(TextView)itemView.findViewById(R.id.tvRestName);
             TvAllRestId=(TextView)itemView.findViewById(R.id.tvIdAllRest);
+            typeface=Typeface.createFromAsset(context.getAssets(),"font/brandon_blk.otf");
+            typeface2=Typeface.createFromAsset(context.getAssets(),"font/brandon_reg.otf");
+            RestName.setTypeface(typeface);
+            TvAllRestId.setTypeface(typeface);
+
         }
     }
 }

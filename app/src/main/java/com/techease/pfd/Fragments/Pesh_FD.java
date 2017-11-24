@@ -60,7 +60,7 @@ String api_token;
     }
 
     private void apicall() {
-        DialogUtils.showProgressSweetDialog(getActivity(), "Loading");
+     //   DialogUtils.showProgressSweetDialog(getActivity(), "Loading");
 
 //        final SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
 //        pDialog.getProgressHelper().setBarColor(Color.parseColor("#7DB3D2"));
@@ -72,7 +72,6 @@ String api_token;
             @Override
             public void onResponse(String response) {
                 Log.d("rest respo", response);
-
                     try {
                         JSONObject jsonObject=new JSONObject(response);
                         JSONArray jsonArr=jsonObject.getJSONArray("data");
@@ -85,7 +84,7 @@ String api_token;
                             model.setImageUrl(temp.getString("image_url"));
                             model.setLocation(temp.getString("location"));
                             PFDmodels.add(model);
-                            DialogUtils.sweetAlertDialog.dismiss();
+                          //  DialogUtils.sweetAlertDialog.dismiss();
                            // pDialog.dismiss();
 
                         }
@@ -99,7 +98,7 @@ String api_token;
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                DialogUtils.sweetAlertDialog.dismiss();
+            //    DialogUtils.sweetAlertDialog.dismiss();
                 Log.d("error" , String.valueOf(error.getCause()));
 
             }
