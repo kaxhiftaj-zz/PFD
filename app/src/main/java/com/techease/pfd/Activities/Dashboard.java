@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Fragments.FbGraphFrag;
 import com.techease.pfd.Fragments.Pesh_FD;
@@ -107,6 +109,8 @@ public class Dashboard extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            LoginManager.getInstance().logOut();
             startActivity(new Intent(Dashboard.this, MainActivity.class));
             finish();
             return true;

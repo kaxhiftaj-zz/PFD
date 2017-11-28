@@ -7,7 +7,7 @@
             android:title="PFD" />
         <item
             android:id="@+id/nav_FbGraph"
-            android:title="Graph"/>
+            android:title="Facebook Post"/>
         <item
             android:id="@+id/nav_slideshow"
             android:title="BEST DEALS" />

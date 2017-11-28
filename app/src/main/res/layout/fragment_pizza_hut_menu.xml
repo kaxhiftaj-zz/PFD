@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#eee"
+    android:background="#fff"
     tools:context="com.techease.pfd.Fragments.PizzaHutMenu">
 
     <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,7 +11,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         app:layout_scrollFlags="scroll|enterAlways"
-        android:background="#eee"
+        android:background="#fff"
         android:gravity="center"
         android:layout_marginTop="5sp"
         android:textAlignment="center"
@@ -23,6 +23,10 @@
             android:layout_height="wrap_content"
             app:tabMode="fixed"
             android:layout_gravity="center"
+            app:tabTextColor="#eee"
+            app:tabPaddingStart="20sp"
+            app:tabIndicatorColor="#129FDD"
+            app:tabSelectedTextColor="#129FDD"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     </android.support.design.widget.AppBarLayout>

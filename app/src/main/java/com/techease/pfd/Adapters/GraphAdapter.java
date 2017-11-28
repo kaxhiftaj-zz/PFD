@@ -40,10 +40,35 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final GraphModel data=Gmodels.get(position);
-        holder.PostStory.setText(data.getStory());
+//        String Message=data.getPostMessage();
+//        String Imageurl=data.getImageUrl();
+//        if (!Message.isEmpty())
+//        {
+//            holder.imageView.setVisibility(View.INVISIBLE);
+//            holder.PostMessage.setVisibility(View.VISIBLE);
+//            holder.PostMessage.setText(data.getPostMessage());
+//
+//        }
+//        else
+//            if (!Imageurl.isEmpty())
+//            {
+//                holder.imageView.setVisibility(View.VISIBLE);
+//                holder.PostMessage.setVisibility(View.INVISIBLE);
+//                Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
+//
+//            }
+//            else if (!Message.isEmpty() && !Imageurl.isEmpty())
+//            {
+//                holder.imageView.setVisibility(View.VISIBLE);
+//                holder.PostMessage.setVisibility(View.VISIBLE);
+//                holder.PostMessage.setText(data.getPostMessage());
+//                Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
+//            }
+        holder.imageView.setVisibility(View.VISIBLE);
+        holder.PostMessage.setVisibility(View.VISIBLE);
         holder.PostMessage.setText(data.getPostMessage());
-        holder.PostName.setText(data.getPostName());
         Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
+
     }
 
 
@@ -54,21 +79,17 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView PostStory,PostName,PostMessage;
+        TextView PostMessage;
         ImageView imageView;
         Typeface typeface,typeface2;
         public MyViewHolder(View itemView) {
 
             super(itemView);
-            PostStory=(TextView)itemView.findViewById(R.id.tvStory);
-            PostName=(TextView)itemView.findViewById(R.id.PostName);
             PostMessage=(TextView)itemView.findViewById(R.id.tvPostMessage);
             imageView=(ImageView)itemView.findViewById(R.id.ivPostPic);
             typeface=Typeface.createFromAsset(context.getAssets(),"font/brandon_bld.otf");
             typeface2=Typeface.createFromAsset(context.getAssets(),"font/brandon_reg.otf");
-            PostName.setTypeface(typeface);
             PostMessage.setTypeface(typeface2);
-            PostStory.setTypeface(typeface);
 
         }
 

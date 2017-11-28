@@ -14,6 +14,16 @@ public class Pesh_FD_Model {
     private String Location;
     private String DeliveryNo;
 
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    private String Rating;
+
 
     public String getId() {
         return id;

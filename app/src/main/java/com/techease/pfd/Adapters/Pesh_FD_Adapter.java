@@ -1,15 +1,17 @@
 package com.techease.pfd.Adapters;
 
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -49,6 +51,7 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         holder.Image_Url=peshFdModel.getImageUrl();
         holder.id=peshFdModel.getId();
         holder.editor.putString("Rest_id",peshFdModel.getId());
+        holder.ratingBar.setRating(Float.parseFloat(peshFdModel.getRating()));
         Glide.with(context).load(holder.Image_Url).into(holder.imageView);
     }
 
@@ -66,6 +69,7 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         SharedPreferences.Editor editor;
         String api_token,Image_Url,id;
         Typeface typeface,typeface2;
+        RatingBar ratingBar;
         public MyViewHolder(View itemView) {
             super(itemView);
             sharedPreferences = context.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
@@ -74,6 +78,7 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
             imageView=(ImageView)itemView.findViewById(R.id.ivPesh_FD);
             RestName=(TextView)itemView.findViewById(R.id.tvRestName);
             TvAllRestId=(TextView)itemView.findViewById(R.id.tvIdAllRest);
+            ratingBar=(RatingBar)itemView.findViewById(R.id.ratingBar);
             typeface=Typeface.createFromAsset(context.getAssets(),"font/brandon_blk.otf");
             typeface2=Typeface.createFromAsset(context.getAssets(),"font/brandon_reg.otf");
             RestName.setTypeface(typeface);
@@ -84,13 +89,21 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
             TvAllRestId.setOnClickListener(this);
 
 
+
+
         }
 
         @Override
         public void onClick(View v) {
 
+            String restId=TvAllRestId.getText().toString();
+            editor.putString("restId",restId);
+            editor.commit();
             Fragment fragment=new Pesh_FD_Details();
-            ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+            Bundle bundle=new Bundle();
+            bundle.putString("restId",restId);
+            fragment.setArguments(bundle);
+            ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack("abc").commit();
         }
     }
 }

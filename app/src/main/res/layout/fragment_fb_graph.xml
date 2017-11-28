@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10sp"
+    android:padding="5sp"
+    android:background="#fff"
     tools:context="com.techease.pfd.Fragments.FbGraphFrag">
 
     <android.support.v7.widget.RecyclerView
@@ -11,7 +12,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/graph"
-        android:background="#eee"
         />
 
 </FrameLayout>

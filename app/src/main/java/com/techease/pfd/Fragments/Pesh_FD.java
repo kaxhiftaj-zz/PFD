@@ -54,12 +54,14 @@ public class Pesh_FD extends Fragment {
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         api_token=sharedPreferences.getString("api_token","");
+
         recyclerView=(RecyclerView)view.findViewById(R.id.rvPesh_FD);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         PFDmodels=new ArrayList<>();
         apicall();
         pesh_fd_adapter=new Pesh_FD_Adapter(getActivity(),PFDmodels);
         recyclerView.setAdapter(pesh_fd_adapter);
+
         return view;
     }
 
@@ -87,6 +89,12 @@ public class Pesh_FD extends Fragment {
                             model.setId(temp.getString("id"));
                             model.setImageUrl(temp.getString("image_url"));
                             model.setLocation(temp.getString("location"));
+                            JSONArray ratingArray = temp.getJSONArray("rating");
+                            for (int j = 0; j<ratingArray.length();j++){
+                                JSONObject tempRating = ratingArray.getJSONObject(j);
+                                model.setRating(tempRating.getString("average"));
+                            }
+
                             PFDmodels.add(model);
                           //  DialogUtils.sweetAlertDialog.dismiss();
                            // pDialog.dismiss();

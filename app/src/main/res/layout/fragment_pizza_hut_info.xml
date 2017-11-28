@@ -6,7 +6,13 @@
     android:background="#F5F5F5"
     android:padding="10sp"
     tools:context="com.techease.pfd.Fragments.PizzaHutInfoFrag">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,6 +64,7 @@
             android:layout_marginLeft="30sp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tvLocationInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HUDSON TERRACE"
@@ -73,9 +80,6 @@
                 android:text="621 West 46th Street,NewYork,NY10036"/>
         </LinearLayout>
     </LinearLayout>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,10 +99,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20sp"
         android:layout_marginRight="20sp"
+        android:textSize="15sp"
         android:textColor="#295786"
-        android:textStyle="bold"
         android:layout_marginTop="10sp"
         android:text="@string/LongTextPizzaHutInfo"/>
+    </LinearLayout>
     </LinearLayout>
     </ScrollView>
 </LinearLayout>

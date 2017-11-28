@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
                         String accessToken = loginResult.getAccessToken().getToken();
                         provider_id = accessToken;
+                        editor.putString("api_tokenFB",provider_id);
+                        editor.commit();
                         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
                             @Override

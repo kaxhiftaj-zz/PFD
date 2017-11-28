@@ -7,10 +7,12 @@
     tools:context="com.techease.pfd.Fragments.Pesh_FD_Details">
 <ImageView
     android:layout_width="match_parent"
-    android:layout_height="200sp"
+    android:layout_height="170sp"
     android:id="@+id/ivPesh_FD_Detial"
+    android:scaleType="fitXY"
     android:background="#eee"/>
     <TextView
+        android:id="@+id/tvRestNamePesh_Fd_Details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PIZZA HUT"
@@ -29,14 +31,16 @@
         android:layout_marginTop="5sp"
         android:background="@drawable/locationicon"
         android:layout_marginLeft="20sp"/>
+
         <TextView
+            android:id="@+id/tvRestLoc_Pesh_Fd_Details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PESHAWAR"
-            android:textSize="15sp"
+            android:layout_gravity="center"
             android:layout_marginLeft="10sp"
+            android:text="PESHAWAR"
             android:textColor="#129FDD"
-            android:layout_gravity="center"/>
+            android:textSize="15sp" />
     </LinearLayout>
     <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -45,6 +49,7 @@
         app:layout_scrollFlags="scroll|enterAlways"
         android:background="#fff"
         android:gravity="center"
+        android:layout_gravity="center"
         android:layout_marginTop="5sp"
         android:textAlignment="center"
         android:layout_height="wrap_content">
@@ -55,6 +60,11 @@
             android:layout_height="wrap_content"
             app:tabMode="fixed"
             android:layout_gravity="center"
+            app:tabGravity="center"
+            app:tabTextColor="#eee"
+            app:tabPaddingStart="70sp"
+            app:tabSelectedTextColor="#129FDD"
+            app:tabIndicatorColor="#129FDD"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     </android.support.design.widget.AppBarLayout>

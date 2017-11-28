@@ -3,17 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#eee"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Story"
-        android:layout_marginTop="10sp"
-        android:textSize="17sp"
-        android:textColor="#129FDD"
-        android:layout_marginLeft="10sp"
-        android:id="@+id/tvStory"/>
-
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -21,40 +12,38 @@
         android:clickable="true"
         android:layout_marginTop="5sp"
         card_view:cardCornerRadius="10dp"
-        card_view:cardBackgroundColor="#eee"
+        card_view:cardBackgroundColor="#fff"
         card_view:cardPreventCornerOverlap="true"
         card_view:cardUseCompatPadding="true"
         android:id="@+id/cardViewCustomPesh_FD">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message"
+            android:textColor="#129FDD"
+            android:layout_marginTop="10sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginBottom="10sp"
+            android:visibility="gone"
+            android:textSize="17sp"
+            android:id="@+id/tvPostMessage"/>
     <ImageView
         android:id="@+id/ivPostPic"
         android:layout_width="match_parent"
         android:layout_height="200sp"
-
+        android:scaleType="fitXY"
+        android:visibility="gone"
         />
-        <TextView
-            android:id="@+id/PostName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10sp"
-            android:textSize="17sp"
-            android:layout_marginLeft="10sp"
-            android:layout_marginRight="10sp"
-            android:textColor="#129FDD"
-            />
+        </LinearLayout>
     </android.support.v7.widget.CardView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Message"
-        android:textColor="#129FDD"
-        android:layout_marginTop="10sp"
-        android:layout_marginLeft="10sp"
-        android:textSize="17sp"
-        android:layout_marginBottom="10sp"
-        android:id="@+id/tvPostMessage"/>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3sp"
+        android:background="#eee"/>
 
 
 </LinearLayout>

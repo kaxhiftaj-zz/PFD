@@ -11,6 +11,16 @@ public class GraphModel {
     private String PostMessage;
     private String ImageUrl;
 
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    private String Type;
+
     public String getPostName() {
         return PostName;
     }
