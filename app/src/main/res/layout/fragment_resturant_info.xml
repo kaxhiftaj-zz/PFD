@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:background="#F5F5F5"
     android:padding="10sp"
-    tools:context="com.techease.pfd.Fragments.PizzaHutInfoFrag">
+    tools:context="com.techease.pfd.Fragments.ResturantInfoFrag">
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">

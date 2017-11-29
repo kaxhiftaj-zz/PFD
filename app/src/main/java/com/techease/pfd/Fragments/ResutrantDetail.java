@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Pesh_FD_Details extends Fragment {
+public class ResutrantDetail extends Fragment {
 
     String getId,api_token,restId;
     TabLayout tabLayout;
@@ -50,7 +50,7 @@ Context context;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_pesh__fd__details, container, false);
+        View view= inflater.inflate(R.layout.fragment_resturant__details, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         api_token=sharedPreferences.getString("api_token","");
@@ -162,10 +162,10 @@ Context context;
 
             switch (position) {
                 case 0:
-                    PizzaHutInfoFrag frag=new PizzaHutInfoFrag();
+                    ResturantInfoFrag frag=new ResturantInfoFrag();
                     return frag;
                 case 1:
-                    PizzaHutMenu frag2=new PizzaHutMenu();
+                    ResturantMenuFrag frag2=new ResturantMenuFrag();
                     return frag2;
                 default:
                     return null;

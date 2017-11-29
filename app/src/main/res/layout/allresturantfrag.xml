@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="#fff"
     android:padding="10sp"
-    tools:context="com.techease.pfd.Fragments.Pesh_FD">
+    tools:context="com.techease.pfd.Fragments.AllResturentFrag">
 <SearchView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

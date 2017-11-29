@@ -23,7 +23,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Fragments.FbGraphFrag;
-import com.techease.pfd.Fragments.Pesh_FD;
+import com.techease.pfd.Fragments.AllResturentFrag;
 import com.techease.pfd.R;
 
 public class Dashboard extends AppCompatActivity
@@ -56,7 +56,7 @@ public class Dashboard extends AppCompatActivity
             textView.setText(name);
         }
 
-        fragment = new Pesh_FD();
+        fragment = new AllResturentFrag();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

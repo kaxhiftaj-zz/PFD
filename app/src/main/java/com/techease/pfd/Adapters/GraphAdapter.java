@@ -40,34 +40,33 @@ public class GraphAdapter extends RecyclerView.Adapter<GraphAdapter.MyViewHolder
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final GraphModel data=Gmodels.get(position);
-//        String Message=data.getPostMessage();
-//        String Imageurl=data.getImageUrl();
-//        if (!Message.isEmpty())
-//        {
-//            holder.imageView.setVisibility(View.INVISIBLE);
-//            holder.PostMessage.setVisibility(View.VISIBLE);
-//            holder.PostMessage.setText(data.getPostMessage());
-//
-//        }
-//        else
-//            if (!Imageurl.isEmpty())
-//            {
-//                holder.imageView.setVisibility(View.VISIBLE);
-//                holder.PostMessage.setVisibility(View.INVISIBLE);
-//                Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
-//
-//            }
-//            else if (!Message.isEmpty() && !Imageurl.isEmpty())
-//            {
-//                holder.imageView.setVisibility(View.VISIBLE);
-//                holder.PostMessage.setVisibility(View.VISIBLE);
-//                holder.PostMessage.setText(data.getPostMessage());
-//                Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
-//            }
-        holder.imageView.setVisibility(View.VISIBLE);
-        holder.PostMessage.setVisibility(View.VISIBLE);
-        holder.PostMessage.setText(data.getPostMessage());
-        Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
+        String Message=data.getPostMessage();
+        String Imageurl=data.getImageUrl();
+             if (Message !=null && Imageurl !=null)
+            {
+                holder.imageView.setVisibility(View.VISIBLE);
+                holder.PostMessage.setVisibility(View.VISIBLE);
+                holder.PostMessage.setText(data.getPostMessage());
+                Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
+            } else
+                if (Message !=null)
+        {
+            holder.imageView.setVisibility(View.INVISIBLE);
+            holder.PostMessage.setVisibility(View.VISIBLE);
+            holder.PostMessage.setText(data.getPostMessage());
+
+        }
+        else
+        if (Imageurl !=null)
+        {
+            holder.imageView.setVisibility(View.VISIBLE);
+            holder.PostMessage.setVisibility(View.INVISIBLE);
+            Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
+
+        }
+
+//        holder.PostMessage.setText(data.getPostMessage());
+//        Glide.with(context).load(data.getImageUrl()).into(holder.imageView);
 
     }
 

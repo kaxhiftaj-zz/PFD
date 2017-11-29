@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#fff"
-    tools:context="com.techease.pfd.Fragments.Pesh_FD_Details">
+    tools:context="com.techease.pfd.Fragments.ResutrantDetail">
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="170sp"

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Controller.Pesh_FD_Model;
-import com.techease.pfd.Fragments.Pesh_FD_Details;
+import com.techease.pfd.Fragments.ResutrantDetail;
 import com.techease.pfd.R;
 
 import java.util.List;
@@ -99,7 +99,7 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
             String restId=TvAllRestId.getText().toString();
             editor.putString("restId",restId);
             editor.commit();
-            Fragment fragment=new Pesh_FD_Details();
+            Fragment fragment=new ResutrantDetail();
             Bundle bundle=new Bundle();
             bundle.putString("restId",restId);
             fragment.setArguments(bundle);

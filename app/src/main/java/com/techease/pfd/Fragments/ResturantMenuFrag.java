@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class PizzaHutMenu extends Fragment {
+public class ResturantMenuFrag extends Fragment {
 
     TabLayout tabLayout;
     String restId,api_token;
@@ -44,7 +44,7 @@ public class PizzaHutMenu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_pizza_hut_menu, container, false);
+        View view= inflater.inflate(R.layout.fragment_resturant_menu, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         restId=sharedPreferences.getString("restId","");
@@ -55,15 +55,14 @@ public class PizzaHutMenu extends Fragment {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
-        apicall();
-//        tabLayout.addTab(tabLayout.newTab().setText("NEW DEAL"));
-//        tabLayout.addTab(tabLayout.newTab().setText("FAMILY DEAL"));
-//        tabLayout.addTab(tabLayout.newTab().setText("STARTERS"));
-//        tabLayout.addTab(tabLayout.newTab().setText("DESERTS"));
+      //  apicall();
+        tabLayout.addTab(tabLayout.newTab().setText("NEW DEAL"));
+        tabLayout.addTab(tabLayout.newTab().setText("FAMILY DEAL"));
+        tabLayout.addTab(tabLayout.newTab().setText("STARTERS"));
+        tabLayout.addTab(tabLayout.newTab().setText("DESERTS"));
 
         viewPager.setAdapter(new PagerAdapter(((FragmentActivity)getActivity()).getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        viewPager.setOffscreenPageLimit(4);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
@@ -101,6 +100,7 @@ public class PizzaHutMenu extends Fragment {
                         Categories=new String[jsonArr.length()];
                         Categories[i]=temp.getString("category_name");
                         tabLayout.addTab(tabLayout.newTab().setText(Categories[i]));
+
                         //  DialogUtils.sweetAlertDialog.dismiss();
                         // pDialog.dismiss();
 
@@ -153,20 +153,68 @@ public class PizzaHutMenu extends Fragment {
 
             switch (position) {
                 case 0:
-                    NewDealsFrag frag=new NewDealsFrag();
+                    ResutantCategoriesFrag frag=new ResutantCategoriesFrag();
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("id",1);
+                    frag.setArguments(bundle);
                     return frag;
                 case 1:
-                    NewDealsFrag frag2=new NewDealsFrag();
+                    ResutantCategoriesFrag frag2=new ResutantCategoriesFrag();
+                    Bundle bundle2=new Bundle();
+                    bundle2.putInt("id",2);
+                    frag2.setArguments(bundle2);
                     return frag2;
                 case 2:
-                    FamilyDealFrag frag3=new FamilyDealFrag();
+                    ResutantCategoriesFrag frag3=new ResutantCategoriesFrag();
+                    Bundle bundle3=new Bundle();
+                    bundle3.putInt("id",3);
+                    frag3.setArguments(bundle3);
                     return frag3;
                 case 3:
-                    StartersFrag frag4=new StartersFrag();
+                    ResutantCategoriesFrag frag4=new ResutantCategoriesFrag();
+                    Bundle bundle4=new Bundle();
+                    bundle4.putInt("id",4);
+                    frag4.setArguments(bundle4);
                     return frag4;
                 case 4:
-                    DesertsFrag frag5=new DesertsFrag();
+                    ResutantCategoriesFrag frag5=new ResutantCategoriesFrag();
+                    Bundle bundle5=new Bundle();
+                    bundle5.putInt("id",5);
+                    frag5.setArguments(bundle5);
                     return frag5;
+//                case 5:
+//                    ResutantCategoriesFrag frag6=new ResutantCategoriesFrag();
+//                    Bundle bundle6=new Bundle();
+//                    bundle6.putInt("id",6);
+//                    frag6.setArguments(bundle6);
+//                    return frag6;
+//                case 6:
+//                    ResutantCategoriesFrag frag7=new ResutantCategoriesFrag();
+//                    Bundle bundle7=new Bundle();
+//                    bundle7.putInt("id",7);
+//                    frag7.setArguments(bundle7);
+//                    return frag7;
+//                case 7:
+//                    ResutantCategoriesFrag frag8=new ResutantCategoriesFrag();
+//                    Bundle bundle8=new Bundle();
+//                    bundle8.putInt("id",8);
+//                    frag8.setArguments(bundle8);
+//                    return frag8;
+//                case 8:
+//                    ResutantCategoriesFrag frag9=new ResutantCategoriesFrag();
+//                    Bundle bundle9=new Bundle();
+//                    bundle9.putInt("id",9);
+//                    frag9.setArguments(bundle9);
+//                    return frag9;
+//                case 9:
+//                    ResutantCategoriesFrag frag10=new ResutantCategoriesFrag();
+//                    Bundle bundle10=new Bundle();
+//                    bundle10.putInt("id",10);
+//                    frag10.setArguments(bundle10);
+//                    return frag10;
+//                case 10:
+//                    ResutantCategoriesFrag frag11=new ResutantCategoriesFrag();
+//                    return frag11;
                 default:
                     return null;
             }

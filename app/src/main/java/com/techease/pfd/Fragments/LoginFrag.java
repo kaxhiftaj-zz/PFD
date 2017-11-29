@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -116,7 +115,6 @@ public class LoginFrag extends Fragment {
                     JSONObject jsonObject = new JSONObject(response).getJSONObject("data");
                     String api_token=jsonObject.getString("api_token");
                     String name=jsonObject.getString("name");
-                    Toast.makeText(getActivity(), name, Toast.LENGTH_SHORT).show();
                     editor.putString("api_token",api_token);
                     editor.putString("name",name);
                     editor.commit();

@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PizzaHutInfoFrag extends Fragment {
+public class ResturantInfoFrag extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String restId,api_token;
@@ -36,7 +36,7 @@ public class PizzaHutInfoFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_pizza_hut_info, container, false);
+        View view= inflater.inflate(R.layout.fragment_resturant_info, container, false);
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         restId=sharedPreferences.getString("restId","");
