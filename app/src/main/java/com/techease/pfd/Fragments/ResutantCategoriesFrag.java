@@ -76,14 +76,20 @@ String restId,api_token,catId;
                         JSONObject jsonObject=new JSONObject(response);
                         JSONObject jsonObj=jsonObject.getJSONObject("data");
                         Log.d("zma data",jsonObj.toString());
-                        JSONArray ratingArray = jsonObj.getJSONArray("menu");
-                            for (int j=0; j<ratingArray.length(); j++)
+                        JSONArray JArray = jsonObj.getJSONArray("menu");
+                            for (int j=0; j<JArray.length(); j++)
                             {
-                                JSONObject Obj=ratingArray.getJSONObject(j);
+                                JSONObject Obj=JArray.getJSONObject(j);
                                 CategoriesMenuModel model=new CategoriesMenuModel();
                                 model.setItemName(Obj.getString("item_name"));
                                 model.setItemDes(Obj.getString("description"));
                                 model.setItemPrice(Obj.getString("price"));
+                                JSONArray ratingArray=Obj.getJSONArray("rating");
+                                for (int z=0; z<ratingArray.length(); z++)
+                                {
+                                    JSONObject temp=ratingArray.getJSONObject(z);
+                                    model.setItemRating(temp.getString("average"));
+                                }
                                 Cmodel.add(model);
                         }
                         categoriesMenuAdapter.notifyDataSetChanged();

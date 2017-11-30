@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.techease.pfd.Controller.CategoriesMenuModel;
@@ -41,6 +42,7 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
         holder.ItemName.setText(model.getItemName());
         holder.ItemPrice.setText(model.getItemPrice());
         holder.ItemDes.setText(model.getItemDes());
+     //   holder.ratingBar.setRating(Float.parseFloat(model.getItemRating()));
 
     }
 
@@ -54,11 +56,13 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView ItemName,ItemPrice,ItemDes;
         Typeface typeface,typeface2;
+        RatingBar ratingBar;
         public MyViewHolder(View itemView) {
             super(itemView);
             ItemName=(TextView)itemView.findViewById(R.id.tvCatItemName);
             ItemDes=(TextView)itemView.findViewById(R.id.tvCatItemDes);
             ItemPrice=(TextView)itemView.findViewById(R.id.tvCatItemPrice);
+            ratingBar=(RatingBar)itemView.findViewById(R.id.ratingBarItem);
 
             typeface=Typeface.createFromAsset(context.getAssets(),"font/brandon_reg.otf");
             typeface2=Typeface.createFromAsset(context.getAssets(),"font/brandon_bld.otf");

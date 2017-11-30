@@ -10,6 +10,16 @@ public class CategoriesMenuModel {
     private String ItemPrice;
     private String ItemDes;
 
+    public String getItemRating() {
+        return ItemRating;
+    }
+
+    public void setItemRating(String itemRating) {
+        ItemRating = itemRating;
+    }
+
+    private String ItemRating;
+
     public String getItemName() {
         return ItemName;
     }
