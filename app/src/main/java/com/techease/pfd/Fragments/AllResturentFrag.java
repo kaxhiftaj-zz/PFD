@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -43,12 +44,14 @@ public class AllResturentFrag extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String api_token;
-
+    ProgressBar progressBar;
+    int progressbarstatus = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.allresturantfrag, container, false);
+        progressBar=(ProgressBar)view.findViewById(R.id.progress_bar);
         searchView=(android.widget.SearchView) view.findViewById(R.id.sv);
         searchView.setQueryHint("Search Here");
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
@@ -65,13 +68,8 @@ public class AllResturentFrag extends Fragment {
     }
 
     private void apicall() {
-     //   DialogUtils.showProgressSweetDialog(getActivity(), "Loading");
-
-//        final SweetAlertDialog pDialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.PROGRESS_TYPE);
-//        pDialog.getProgressHelper().setBarColor(Color.parseColor("#7DB3D2"));
-//        pDialog.setTitleText("Loading");
-//        pDialog.setCancelable(false);
-//        pDialog.show();
+        progressBar.setVisibility(View.VISIBLE);
+       setProgressValue(progressbarstatus);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://pfd.techeasesol.com/api/v1/resturants?api_token="+api_token
                 , new Response.Listener<String>() {
             @Override
@@ -95,8 +93,7 @@ public class AllResturentFrag extends Fragment {
                             }
 
                             PFDmodels.add(model);
-                          //  DialogUtils.sweetAlertDialog.dismiss();
-                           // pDialog.dismiss();
+                            progressBar.setVisibility(View.INVISIBLE);
 
                         }
                         pesh_fd_adapter.notifyDataSetChanged();
@@ -109,7 +106,7 @@ public class AllResturentFrag extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-            //    DialogUtils.sweetAlertDialog.dismiss();
+              progressBar.setVisibility(View.INVISIBLE);
                 Log.d("error" , String.valueOf(error.getCause()));
 
             }
@@ -131,6 +128,24 @@ public class AllResturentFrag extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(stringRequest);
+    }
+    private void setProgressValue(final int progress) {
+
+        // set the progress
+        progressBar.setProgress(progress);
+        // thread is used to change the progress value
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setProgressValue(progress + 10);
+            }
+        });
+        thread.start();
     }
 
 }

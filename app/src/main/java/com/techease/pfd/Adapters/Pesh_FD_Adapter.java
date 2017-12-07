@@ -53,6 +53,7 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
         holder.editor.putString("Rest_id",peshFdModel.getId());
         holder.ratingBar.setRating(Float.parseFloat(peshFdModel.getRating()));
         Glide.with(context).load(holder.Image_Url).into(holder.imageView);
+        holder.editor.putInt("No resturents",(pesh_fd_models.size()));
     }
 
 
@@ -60,6 +61,7 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
     @Override
     public int getItemCount() {
         return pesh_fd_models.size();
+
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -95,6 +97,15 @@ public class Pesh_FD_Adapter extends RecyclerView.Adapter<Pesh_FD_Adapter.MyView
 
         @Override
         public void onClick(View v) {
+
+//            String restId=TvAllRestId.getText().toString();
+//            editor.putString("restId",restId);
+//            editor.commit();
+//            Fragment fragment=new ResutrantDetail();
+//            Bundle bundle=new Bundle();
+//            bundle.putString("restId",restId);
+//            fragment.setArguments(bundle);
+//            ((AppCompatActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).addToBackStack("abc").commit();
 
             String restId=TvAllRestId.getText().toString();
             editor.putString("restId",restId);

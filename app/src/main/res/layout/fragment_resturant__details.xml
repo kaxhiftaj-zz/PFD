@@ -2,9 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#fff"
     tools:context="com.techease.pfd.Fragments.ResutrantDetail">
+
 <ImageView
     android:layout_width="match_parent"
     android:layout_height="170sp"
@@ -16,18 +18,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PIZZA HUT"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="#275786"
         android:textStyle="bold"
-        android:layout_marginTop="10sp"
+        android:layout_marginTop="5sp"
         android:layout_marginLeft="20sp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <ImageView
-        android:layout_width="15sp"
-        android:layout_height="25sp"
+        android:layout_width="wrap_content"
+        android:layout_height="15sp"
         android:layout_marginTop="5sp"
         android:background="@drawable/locationicon"
         android:layout_marginLeft="20sp"/>
@@ -40,7 +42,7 @@
             android:layout_marginLeft="10sp"
             android:text="PESHAWAR"
             android:textColor="#129FDD"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
     </LinearLayout>
     <android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -52,22 +54,25 @@
         android:layout_gravity="center"
         android:layout_marginTop="5sp"
         android:textAlignment="center"
-        android:layout_height="wrap_content">
-
+        android:layout_height="35sp">
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayoutPizzaHut"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
+            app:tabMaxWidth="0dp"
+            app:tabGravity="fill"
             app:tabMode="fixed"
             android:layout_gravity="center"
-            app:tabGravity="center"
             app:tabTextColor="#eee"
             app:tabPaddingStart="70sp"
             app:tabSelectedTextColor="#129FDD"
             app:tabIndicatorColor="#129FDD"
+            app:tabPaddingEnd="0dp"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-
     </android.support.design.widget.AppBarLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pagerInfoPizzaHut"
@@ -75,4 +80,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v4.view.ViewPager>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginBottom="120dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/fab_margin"
+            app:backgroundTint="#129FDD"
+            app:elevation="6dp"
+            android:scaleType="fitStart"
+            android:visibility="gone"
+            app:pressedTranslationZ="12dp"
+            android:src="@drawable/back" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginBottom="75dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="@dimen/fab_margin"
+            android:visibility="gone"
+            app:elevation="6dp"
+            android:scaleType="fitStart"
+            app:backgroundTint="#129FDD"
+            app:pressedTranslationZ="12dp"
+            android:src="@drawable/right_arrow" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_gravity="bottom|end"
+            app:elevation="6dp"
+            android:background="#fff"
+            android:scaleType="fitXY"
+            app:pressedTranslationZ="12dp"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/addflot" />
+    </FrameLayout>
 </LinearLayout>

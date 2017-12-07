@@ -7,6 +7,9 @@
     android:background="#fff"
     android:padding="10sp"
     tools:context="com.techease.pfd.Fragments.AllResturentFrag">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 <SearchView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +26,18 @@
         android:id="@+id/rvPesh_FD"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10sp"
+        android:layout_marginTop="60sp"
         ></android.support.v7.widget.RecyclerView>
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:max="100"
+            android:progress="0" />
+    </FrameLayout>
 </LinearLayout>

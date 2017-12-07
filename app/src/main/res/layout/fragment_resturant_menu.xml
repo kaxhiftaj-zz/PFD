@@ -13,18 +13,17 @@
         app:layout_scrollFlags="scroll|enterAlways"
         android:background="#fff"
         android:gravity="center"
-        android:layout_marginTop="5sp"
         android:textAlignment="center"
-        android:layout_height="wrap_content">
+        android:layout_height="35sp">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayoutMenuPizzaHut"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30sp"
             app:tabMode="fixed"
             android:layout_gravity="center"
             app:tabTextColor="#eee"
-            app:tabPaddingStart="20sp"
+            app:tabPaddingStart="10sp"
             app:tabIndicatorColor="#129FDD"
             app:tabSelectedTextColor="#129FDD"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>

@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TIMINGS"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textColor="#129FDD"
                 android:textStyle="bold"
                 />
@@ -51,13 +51,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/locationicon"
             android:layout_gravity="center"
             android:layout_marginLeft="20sp"
-            />
+            android:src="@drawable/locationicon" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="HUDSON TERRACE"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="#129FDD"/>
             <TextView
@@ -83,7 +83,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="10sp"
         android:orientation="vertical">
     <TextView
         android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
         android:layout_marginLeft="20sp"
         android:text="About"
         android:textColor="#BDBDBD"
-        android:textSize="18sp"
+        android:textSize="15sp"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/tvLongText_Pizza_Hut_Info"
@@ -101,7 +101,7 @@
         android:layout_marginRight="20sp"
         android:textSize="15sp"
         android:textColor="#295786"
-        android:layout_marginTop="10sp"
+        android:layout_marginTop="5sp"
         android:text="@string/LongTextPizzaHutInfo"/>
     </LinearLayout>
     </LinearLayout>

@@ -2,8 +2,8 @@ package com.techease.pfd.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,7 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -35,26 +38,51 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class ResutrantDetail extends Fragment {
+
+public class ResutrantDetail extends Fragment implements View.OnClickListener {
 
     String getId,api_token,restId;
     TabLayout tabLayout;
-    Typeface typeface;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ImageView imageView;
     TextView RestName,RestLocation;
-Context context;
+    ProgressBar progressBar;
+    int progressbarstatus = 0;
+    Context context;
+    int ID=1;
+    private Boolean isFabOpen = false;
+    private FloatingActionButton fab,fab1,fab2;
+    private Animation fab_open,fab_close,rotate_forward,rotate_backward;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_resturant__details, container, false);
+
+        fab = (FloatingActionButton)view.findViewById(R.id.fab);
+        fab1 = (FloatingActionButton)view.findViewById(R.id.fab1);
+        fab2 = (FloatingActionButton)view.findViewById(R.id.fab2);
+        fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_close);
+        rotate_forward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_forward);
+        rotate_backward = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.rotate_backward);
+        fab.setOnClickListener(this);
+        fab1.setOnClickListener(this);
+        fab2.setOnClickListener(this);
+
+
+        //Resturent Id get from All Resturent Fragment
+        restId=getArguments().getString("restId");
+
+
+     //  progressBar=(ProgressBar)view.findViewById(R.id.progress_barRest_Detail);
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         api_token=sharedPreferences.getString("api_token","");
-        restId=getArguments().getString("restId");
+
         editor.putString("restId",restId);
         editor.commit();
         imageView=(ImageView)view.findViewById(R.id.ivPesh_FD_Detial);
@@ -71,6 +99,7 @@ Context context;
         viewPager.setAdapter(new PagerAdapter(((FragmentActivity)getActivity()).getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        reduceMarginsInTabs(tabLayout,20);
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
@@ -93,9 +122,26 @@ Context context;
 
         return  view;
     }
+    public static void reduceMarginsInTabs(TabLayout tabLayout, int marginOffset) {
+
+        View tabStrip = tabLayout.getChildAt(0);
+        if (tabStrip instanceof ViewGroup) {
+            ViewGroup tabStripGroup = (ViewGroup) tabStrip;
+            for (int i = 0; i < ((ViewGroup) tabStrip).getChildCount(); i++) {
+                View tabView = tabStripGroup.getChildAt(i);
+                if (tabView.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+                    ((ViewGroup.MarginLayoutParams) tabView.getLayoutParams()).leftMargin = marginOffset;
+                    ((ViewGroup.MarginLayoutParams) tabView.getLayoutParams()).rightMargin = marginOffset;
+                }
+            }
+
+            tabLayout.requestLayout();
+        }
+    }
 
     private void apicall() {
-
+       // progressBar.setVisibility(View.VISIBLE);
+        //setProgressValue(progressbarstatus);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://pfd.techeasesol.com/api/v1/resturants/"+restId+"?api_token="+api_token
                 , new Response.Listener<String>() {
             @Override
@@ -109,8 +155,8 @@ Context context;
                         RestName.setText(JsonGet.getString("name"));
                         RestLocation.setText(JsonGet.getString("location"));
 
-                        //  DialogUtils.sweetAlertDialog.dismiss();
-                        // pDialog.dismiss();
+//                        progressBar.setVisibility(View.INVISIBLE);
+
 
 
 
@@ -122,7 +168,7 @@ Context context;
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //    DialogUtils.sweetAlertDialog.dismiss();
+                progressBar.setVisibility(View.INVISIBLE);
                 Log.d("error" , String.valueOf(error.getCause()));
 
             }
@@ -146,8 +192,83 @@ Context context;
         mRequestQueue.add(stringRequest);
     }
 
+    @Override
+    public void onClick(View v) {
 
-    public class PagerAdapter extends FragmentStatePagerAdapter {
+        int id = v.getId();
+        switch (id){
+            case R.id.fab:
+
+                animateFAB();
+                break;
+            case R.id.fab1:
+
+                    restId=String.valueOf(++ID);
+                    apicall();
+
+                break;
+            case R.id.fab2:
+                if (restId.equals("1"))
+                {
+                    restId="1";
+                    apicall();
+                }
+                else
+                    ID=Integer.parseInt(restId);
+                    restId=String.valueOf(--ID);
+                    apicall();
+                break;
+        }
+
+    }
+    public void animateFAB(){
+
+        if(isFabOpen){
+            fab2.setVisibility(View.INVISIBLE);
+            fab1.setVisibility(View.INVISIBLE);
+            fab.startAnimation(rotate_backward);
+            fab1.startAnimation(fab_close);
+            fab2.startAnimation(fab_close);
+            fab1.setClickable(false);
+            fab2.setClickable(false);
+            isFabOpen = false;
+            Log.d("close", "close");
+
+        } else {
+            isFabOpen = true;
+            fab1.setVisibility(View.VISIBLE);
+            fab2.setVisibility(View.VISIBLE);
+            fab.startAnimation(rotate_forward);
+            fab1.startAnimation(fab_open);
+            fab2.startAnimation(fab_open);
+            fab1.setClickable(true);
+            fab2.setClickable(true);
+
+            Log.d("open","open");
+
+        }
+    }
+//    private void setProgressValue(final int progress) {
+//
+//        // set the progress
+//        progressBar.setProgress(progress);
+//        // thread is used to change the progress value
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                setProgressValue(progress + 10);
+//            }
+//        });
+//        thread.start();
+//    }
+
+
+    public static class PagerAdapter extends FragmentStatePagerAdapter {
         int mNumOfTabs;
 
         public PagerAdapter(android.support.v4.app.FragmentManager fm, int NumOfTabs) {
