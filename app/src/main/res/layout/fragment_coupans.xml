@@ -11,16 +11,43 @@
     android:layout_height="200sp"
     android:src="@drawable/couponlogo"
     android:layout_gravity="center"/>
-
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="10sp"
+    android:orientation="horizontal">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GET 30% DISCOUNT"
-        android:layout_gravity="center"
-        android:layout_marginTop="10sp"
+        android:text="GET"
         android:textSize="25sp"
+        android:gravity="center"
         android:textColor="#295786"
-        android:textStyle="bold"/>
+        />
+    <TextView
+        android:id="@+id/DiscountNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30"
+        android:layout_marginLeft="5sp"
+        android:textSize="25sp"
+        android:textColor="#295786"/>
+    <TextView
+        android:id="@+id/DiscountType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="%"
+        android:textSize="20sp"
+        android:textColor="#295786"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discount"
+        android:layout_marginLeft="5sp"
+        android:textColor="#295786"
+        android:textSize="25sp"/>
+</LinearLayout>
 <FrameLayout
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
@@ -36,26 +63,27 @@
         android:text="Use Coupan"
         android:textSize="18sp"
         android:textColor="#fff"
-        android:layout_marginBottom="25sp"
-        android:layout_gravity="center|right"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:layout_marginTop="60sp"
         android:layout_marginRight="40sp"
 
         />
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
         android:clickable="true"
         card_view:cardBackgroundColor="#fff"
-        card_view:cardPreventCornerOverlap="true"
-        card_view:cardUseCompatPadding="true"
         android:layout_gravity="center"
-        android:layout_marginTop="25sp"
+        android:layout_marginLeft="30sp"
+        android:layout_marginRight="30sp"
+        android:layout_marginTop="10sp"
         android:id="@+id/cardViewCustomBestDeal">
         <TextView
             android:id="@+id/coupanName"
-            android:layout_width="300sp"
-            android:layout_height="60sp"
+            android:layout_width="match_parent"
+            android:layout_height="45sp"
             android:text="PESHAWAR 2017"
             android:background="#295786"
             android:textSize="20sp"
@@ -65,7 +93,6 @@
             android:layout_marginRight="2sp"
             android:layout_marginBottom="2sp"
             android:layout_gravity="center"
-            android:padding="15sp"
             android:gravity="center"
             android:textColor="#fff"
             />
@@ -79,5 +106,15 @@
         android:textColor="#fff"
         android:textSize="15sp"
         android:layout_marginBottom="40sp"/>
+    <ProgressBar
+        android:id="@+id/progress_barCoupans"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:max="100"
+        android:progress="0" />
 </FrameLayout>
 </LinearLayout>

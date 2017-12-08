@@ -22,8 +22,9 @@ import android.widget.TextView;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.techease.pfd.Configuration.Links;
-import com.techease.pfd.Fragments.FbGraphFrag;
 import com.techease.pfd.Fragments.AllResturentFrag;
+import com.techease.pfd.Fragments.CoupansFrag;
+import com.techease.pfd.Fragments.FbGraphFrag;
 import com.techease.pfd.R;
 
 public class Dashboard extends AppCompatActivity
@@ -128,12 +129,9 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.MainScreen) {
             Fragment fragmentGraph=new AllResturentFrag();
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentGraph).commit();
-        }  else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-
-
+        }  else if (id == R.id.nav_manage) {
+            Fragment fragmentCoupan=new CoupansFrag();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

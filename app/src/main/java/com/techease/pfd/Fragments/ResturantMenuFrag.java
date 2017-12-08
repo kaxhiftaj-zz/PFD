@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
+import com.techease.pfd.Utils.CheckNetwork;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,23 +50,31 @@ FrameLayout frameLayout;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_resturant_menu, container, false);
-        frameLayout=(FrameLayout)view.findViewById(R.id.frameLayoutCatItems);
-        sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        restId = sharedPreferences.getString("restId", "");
-        api_token = sharedPreferences.getString("api_token", "");
-        viewPager = (ViewPager) view.findViewById(R.id.pagerMenuPizzaHut);
-        tabLayout = (TabLayout) view.findViewById(R.id.tabLayoutMenuPizzaHut);
+        if(CheckNetwork.isInternetAvailable(getActivity())) //returns true if internet available
+        {
+            frameLayout=(FrameLayout)view.findViewById(R.id.frameLayoutCatItems);
+            sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            restId = sharedPreferences.getString("restId", "");
+            api_token = sharedPreferences.getString("api_token", "");
+            viewPager = (ViewPager) view.findViewById(R.id.pagerMenuPizzaHut);
+            tabLayout = (TabLayout) view.findViewById(R.id.tabLayoutMenuPizzaHut);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        //  tabLayout.addTab(tabLayout.newTab().setText("Test"));
-        //   tabLayout.addTab(tabLayout.newTab().setText("Test2"));
-        apicall();
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+            mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            //  tabLayout.addTab(tabLayout.newTab().setText("Test"));
+            //   tabLayout.addTab(tabLayout.newTab().setText("Test2"));
+            apicall();
 //        tabLayout.addTab(tabLayout.newTab().setText("NEW DEAL"));
 //        tabLayout.addTab(tabLayout.newTab().setText("FAMILY DEAL"));
 //        tabLayout.addTab(tabLayout.newTab().setText("STARTERS"));
 //        tabLayout.addTab(tabLayout.newTab().setText("DESERTS"));
+        }
+        else
+        {
+            Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+        }
+
 
 
         return view;

@@ -7,7 +7,7 @@
             android:title="PFD" />
         <item
             android:id="@+id/nav_FbGraph"
-            android:title="Facebook Post"/>
+            android:title="FACEBOOK POST"/>
         <item
             android:id="@+id/nav_manage"
             android:title="COUPANS" />

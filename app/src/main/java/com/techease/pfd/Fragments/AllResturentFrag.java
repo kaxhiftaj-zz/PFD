@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -21,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.techease.pfd.Adapters.Pesh_FD_Adapter;
+import com.techease.pfd.Utils.CheckNetwork;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Controller.Pesh_FD_Model;
 import com.techease.pfd.R;
@@ -51,18 +53,29 @@ public class AllResturentFrag extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.allresturantfrag, container, false);
-        progressBar=(ProgressBar)view.findViewById(R.id.progress_bar);
-        searchView=(android.widget.SearchView) view.findViewById(R.id.sv);
-        searchView.setQueryHint("Search Here");
-        sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        api_token=sharedPreferences.getString("api_token","");
-        recyclerView=(RecyclerView)view.findViewById(R.id.rvPesh_FD);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        PFDmodels=new ArrayList<>();
-        apicall();
-        pesh_fd_adapter=new Pesh_FD_Adapter(getActivity(),PFDmodels);
-        recyclerView.setAdapter(pesh_fd_adapter);
+
+        if(CheckNetwork.isInternetAvailable(getActivity()))
+        {
+            progressBar=(ProgressBar)view.findViewById(R.id.progress_bar);
+            searchView=(android.widget.SearchView) view.findViewById(R.id.sv);
+            searchView.setQueryHint("Search Here");
+            sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
+            api_token=sharedPreferences.getString("api_token","");
+            recyclerView=(RecyclerView)view.findViewById(R.id.rvPesh_FD);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            PFDmodels=new ArrayList<>();
+            apicall();
+            pesh_fd_adapter=new Pesh_FD_Adapter(getActivity(),PFDmodels);
+            recyclerView.setAdapter(pesh_fd_adapter);
+
+        }
+        else
+        {
+            Toast.makeText(getActivity(),"No Internet Connection",Toast.LENGTH_SHORT).show();
+        }
+
+
 
         return view;
     }
@@ -147,5 +160,4 @@ public class AllResturentFrag extends Fragment {
         });
         thread.start();
     }
-
 }

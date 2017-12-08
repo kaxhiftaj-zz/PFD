@@ -4,12 +4,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,7 +21,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.techease.pfd.Adapters.CoupanListAdapter;
 import com.techease.pfd.Configuration.Links;
+import com.techease.pfd.Controller.CoupanListModel;
 import com.techease.pfd.R;
 import com.techease.pfd.Utils.CheckNetwork;
 
@@ -28,38 +31,41 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class CoupansFrag extends Fragment {
 
-    TextView UseCoupan,CoupanTime,CoupanName,DiscountNo,DiscountType;
-    String api_token,restId;
+public class ListOfCoupansFrag extends Fragment {
+
+    RecyclerView recyclerView;
+    CoupanListAdapter coupanListAdapter;
+    List<CoupanListModel> coupanListModels;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    String api_token,restId;
     ProgressBar progressBar;
     int progressbarstatus = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_coupans, container, false);
+        View view= inflater.inflate(R.layout.fragment_listofcoupans, container, false);
+
         if(CheckNetwork.isInternetAvailable(getActivity())) //returns true if internet available
         {
-
-            progressBar=(ProgressBar)view.findViewById(R.id.progress_barCoupans);
-
-            UseCoupan=(TextView)view.findViewById(R.id.useCoupan);
-            CoupanName=(TextView)view.findViewById(R.id.coupanName);
-            CoupanTime=(TextView)view.findViewById(R.id.coupansValidation);
-            DiscountNo=(TextView)view.findViewById(R.id.DiscountNo);
-            DiscountType=(TextView)view.findViewById(R.id.DiscountType);
-
+            progressBar=(ProgressBar)view.findViewById(R.id.progress_barListOfCoupan);
             sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
             api_token=sharedPreferences.getString("api_token","");
-            restId=sharedPreferences.getString("restId","");
+            Log.d("tok",api_token);
+            recyclerView=(RecyclerView)view.findViewById(R.id.rvListOfCoupans);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            coupanListModels=new ArrayList<>();
             apicall();
+            coupanListAdapter=new CoupanListAdapter(getActivity(),coupanListModels);
+            recyclerView.setAdapter(coupanListAdapter);
         }
         else
         {
@@ -70,28 +76,32 @@ public class CoupansFrag extends Fragment {
     }
 
     private void apicall() {
-        progressBar.setVisibility(View.VISIBLE);
+       // progressBar.setVisibility(View.VISIBLE);
         setProgressValue(progressbarstatus);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://pfd.techeasesol.com/api/v1/coupons?api_token="+api_token
                 , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("rest respo", response);
-
+                Log.d("cop resp", response);
                 try {
                     JSONObject jsonObject=new JSONObject(response);
                     JSONArray jsonArr=jsonObject.getJSONArray("data");
-                    for(int i=0; i<jsonArr.length(); i++)
-                    {
+                    for (int i=0; i<jsonArr.length(); i++) {
+                        Log.d("datta",jsonArr.toString());
                         JSONObject object=jsonArr.getJSONObject(i);
-                        CoupanName.setText(object.getString("coupon_code"));
-                        CoupanTime.setText(object.getString("expiry"));
-                        DiscountNo.setText(object.getString("discount"));
-                        DiscountType.setText(object.getString("discount_type"));
-                        progressBar.setVisibility(View.INVISIBLE);
+                        CoupanListModel model=new CoupanListModel();
+                        model.setCoupanCode(object.getString("coupon_code"));
+                        model.setCoupanDate(object.getString("expiry"));
+                        model.setDiscountNo(object.getString("discount"));
+                        model.setDiscountType(object.getString("discount_type"));
+                        model.setDiscountId(object.getString("id"));
+                        coupanListModels.add(model);
+                       progressBar.setVisibility(View.INVISIBLE);
+
                     }
+                    coupanListAdapter.notifyDataSetChanged();
+
                 } catch (JSONException e) {
-                    progressBar.setVisibility(View.INVISIBLE);
                     e.printStackTrace();
                 }
             }
@@ -140,5 +150,4 @@ public class CoupansFrag extends Fragment {
         });
         thread.start();
     }
-
 }
