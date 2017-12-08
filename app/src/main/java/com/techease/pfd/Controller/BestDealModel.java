@@ -5,5 +5,5 @@ package com.techease.pfd.Controller;
  */
 
 public class BestDealModel {
-    
+
 }

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +23,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.techease.pfd.Adapters.Pesh_FD_Adapter;
-import com.techease.pfd.Utils.CheckNetwork;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Controller.Pesh_FD_Model;
 import com.techease.pfd.R;
+import com.techease.pfd.Utils.CheckNetwork;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,26 +42,25 @@ import java.util.Map;
 
 public class AllResturentFrag extends Fragment {
 
-    android.widget.SearchView searchView;
     RecyclerView recyclerView;
     List<Pesh_FD_Model> PFDmodels;
     Pesh_FD_Adapter pesh_fd_adapter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String api_token;
+    String api_token,image,name,id,locatoin;
     ProgressBar progressBar;
     int progressbarstatus = 0;
+    MaterialSearchBar searchView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.allresturantfrag, container, false);
-
+        searchView=(MaterialSearchBar) view.findViewById(R.id.sv);
+        searchEducationList();
         if(CheckNetwork.isInternetAvailable(getActivity()))
         {
             progressBar=(ProgressBar)view.findViewById(R.id.progress_bar);
-            searchView=(android.widget.SearchView) view.findViewById(R.id.sv);
-            searchView.setQueryHint("Search Here");
             sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
             api_token=sharedPreferences.getString("api_token","");
@@ -79,7 +81,41 @@ public class AllResturentFrag extends Fragment {
 
         return view;
     }
+    public void searchEducationList() {
 
+
+        searchView.addTextChangeListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence query, int i, int i1, int i2) {
+                Log.d("LOG_TAG", getClass().getSimpleName() + " text changed " + searchView.getText());
+
+                query = query.toString().toLowerCase();
+                // Toast.makeText(TrafficSigns.this, "Query is: "+query, Toast.LENGTH_SHORT).show();
+                List<Pesh_FD_Model> newData = new ArrayList<>();
+                for (int j = 0; j < PFDmodels.size(); j++) {
+                    final String test = PFDmodels.get(j).getImageUrl().toLowerCase();
+                    final String test2 = PFDmodels.get(j).getRestName().toLowerCase();
+                    final String test3=PFDmodels.get(j).getId().toLowerCase();
+                    final String test4=PFDmodels.get(j).getLocation().toLowerCase();
+                    if (test2.startsWith(String.valueOf(query))) {
+                        newData.add(PFDmodels.get(j));
+                    }
+                }
+                // specify an adapter (see also next example)
+                pesh_fd_adapter = new Pesh_FD_Adapter(getActivity(), newData);
+                recyclerView.setAdapter(pesh_fd_adapter);
+                pesh_fd_adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
     private void apicall() {
         progressBar.setVisibility(View.VISIBLE);
        setProgressValue(progressbarstatus);
@@ -95,6 +131,10 @@ public class AllResturentFrag extends Fragment {
                         {
                             JSONObject temp = jsonArr.getJSONObject(i);
                             Pesh_FD_Model model=new Pesh_FD_Model();
+                            name=temp.getString("name");
+                            id=temp.getString("id");
+                            locatoin=temp.getString("location");
+                            image=temp.getString("image_url");
                             model.setRestName(temp.getString("name"));
                             model.setId(temp.getString("id"));
                             model.setImageUrl(temp.getString("image_url"));

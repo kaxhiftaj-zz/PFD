@@ -66,13 +66,23 @@
             app:tabTextColor="#eee"
             app:tabPaddingStart="70sp"
             app:tabSelectedTextColor="#129FDD"
-            app:tabIndicatorColor="#129FDD"
+            app:tabIndicatorColor="#fff"
             app:tabPaddingEnd="0dp"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
     </android.support.design.widget.AppBarLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/progress_barRestDetails"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="50sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone"
+            android:max="100"
+            android:progress="0" />
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pagerInfoPizzaHut"
@@ -82,8 +92,8 @@
     </android.support.v4.view.ViewPager>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab2"
-            android:layout_width="30sp"
-            android:layout_height="30sp"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
             android:layout_marginBottom="120dp"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="@dimen/fab_margin"
@@ -95,8 +105,8 @@
             android:src="@drawable/back" />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab1"
-            android:layout_width="30sp"
-            android:layout_height="30sp"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
             android:layout_marginBottom="75dp"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="@dimen/fab_margin"
@@ -108,8 +118,8 @@
             android:src="@drawable/right_arrow" />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="40sp"
-            android:layout_height="40sp"
+            android:layout_width="50sp"
+            android:layout_height="50sp"
             android:layout_gravity="bottom|end"
             app:elevation="6dp"
             android:background="#fff"

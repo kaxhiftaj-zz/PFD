@@ -62,6 +62,8 @@ public class ResutrantDetail extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_resturant__details, container, false);
 
+        progressBar=(ProgressBar)view.findViewById(R.id.progress_barRestDetails);
+
         fab = (FloatingActionButton)view.findViewById(R.id.fab);
         fab1 = (FloatingActionButton)view.findViewById(R.id.fab1);
         fab2 = (FloatingActionButton)view.findViewById(R.id.fab2);
@@ -140,8 +142,8 @@ public class ResutrantDetail extends Fragment implements View.OnClickListener {
     }
 
     private void apicall() {
-       // progressBar.setVisibility(View.VISIBLE);
-        //setProgressValue(progressbarstatus);
+        progressBar.setVisibility(View.VISIBLE);
+        setProgressValue(progressbarstatus);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://pfd.techeasesol.com/api/v1/resturants/"+restId+"?api_token="+api_token
                 , new Response.Listener<String>() {
             @Override
@@ -155,7 +157,7 @@ public class ResutrantDetail extends Fragment implements View.OnClickListener {
                         RestName.setText(JsonGet.getString("name"));
                         RestLocation.setText(JsonGet.getString("location"));
 
-//                        progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
 
 
 
@@ -248,24 +250,24 @@ public class ResutrantDetail extends Fragment implements View.OnClickListener {
 
         }
     }
-//    private void setProgressValue(final int progress) {
-//
-//        // set the progress
-//        progressBar.setProgress(progress);
-//        // thread is used to change the progress value
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(100);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                setProgressValue(progress + 10);
-//            }
-//        });
-//        thread.start();
-//    }
+    private void setProgressValue(final int progress) {
+
+        // set the progress
+        progressBar.setProgress(progress);
+        // thread is used to change the progress value
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setProgressValue(progress + 10);
+            }
+        });
+        thread.start();
+    }
 
 
     public static class PagerAdapter extends FragmentStatePagerAdapter {

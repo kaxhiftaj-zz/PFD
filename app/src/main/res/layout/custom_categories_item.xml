@@ -1,55 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#fff"
     >
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <TextView
-        android:id="@+id/tvCatItemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WOW DEAL"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        android:textColor="#129FDD"
-        android:layout_marginTop="5sp"
-        android:layout_marginLeft="20sp"/>
-        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCatItemName"
             android:layout_width="wrap_content"
-            android:layout_height="25sp"
-            android:layout_gravity="right|center"
-            android:layout_marginLeft="50sp"
-            android:id="@+id/ratingBarItem"
-            android:isIndicator="true"
-            style="@style/Widget.MaterialRatingBar.RatingBar" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="5sp"
+            android:text="WOW DEAL"
+            android:textColor="#129FDD"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvCatItemDes"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="3sp"
+            android:textColor="#bdbdbd"
+            android:layout_marginLeft="20sp"
+            android:text="2 Large Pizza with 1.5l Pespsi"
+          />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20sp"
-        android:orientation="horizontal">
-    <TextView
-        android:id="@+id/tvCatItemDes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3sp"
-        android:textColor="#bdbdbd"
-        android:text="2 Large Pizza with 1.5l Pespsi"
-        android:layout_weight="1" />
+        android:orientation="vertical">
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="20sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="10sp"
+            android:id="@+id/ratingBarItem"
+            android:layout_gravity="right"
+            style="@style/Widget.MaterialRatingBar.RatingBar" />
         <TextView
             android:id="@+id/tvCatItemPrice"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1599/-"
             android:textColor="#129FDD"
-            android:gravity="right"
+            android:textSize="15sp"
+            android:layout_gravity="right"
+            android:layout_marginTop="3sp"
             android:layout_marginRight="20sp"
-            android:layout_weight="0.2" />
+        />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
