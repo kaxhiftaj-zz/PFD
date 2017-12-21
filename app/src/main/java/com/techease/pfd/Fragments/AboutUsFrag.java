@@ -16,9 +16,9 @@ import com.techease.pfd.R;
 
 public class AboutUsFrag extends Fragment implements View.OnClickListener {
 
-    TextView tvTitleAboutUs,tvFbGroupTitleABoutUs,tvFbLinkAboutUs;
-    Typeface typeface,typeface2;
-    CardView cardView;
+    TextView tvTitleAboutUs,tvFbGroupTitleABoutUs,tvFbLinkAboutUs,tv1,tv2,tv3,tvCompany;
+    Typeface typeface,typeface2,typeface3;
+    CardView cardView,cardView2,cardView3;
     WebView webView;
 
     @Override
@@ -32,16 +32,64 @@ public class AboutUsFrag extends Fragment implements View.OnClickListener {
         tvFbGroupTitleABoutUs=(TextView)view.findViewById(R.id.tvFbGroupABoutUs);
         tvFbLinkAboutUs=(TextView)view.findViewById(R.id.tvFbLInkABoutUs);
         webView=(WebView)view.findViewById(R.id.webView1);
-        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk");
-        typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg");
+        tv1=(TextView)view.findViewById(R.id.tv1);
+        tv2=(TextView)view.findViewById(R.id.tv2);
+        tv3=(TextView)view.findViewById(R.id.tvLongText);
+        tvCompany=(TextView)view.findViewById(R.id.tvCompany);
+        cardView2=(CardView)view.findViewById(R.id.card3);
+        cardView3=(CardView)view.findViewById(R.id.cardViewCustomPesh_FD);
+        typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
+        typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
+        typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_bld.otf");
 
         tvTitleAboutUs.setTypeface(typeface);
         tvFbLinkAboutUs.setTypeface(typeface2);
-        tvFbGroupTitleABoutUs.setTypeface(typeface2);
+        tvFbGroupTitleABoutUs.setTypeface(typeface3);
+        tv2.setTypeface(typeface3);
+        tv1.setTypeface(typeface3);
+        tv3.setTypeface(typeface2);
+        tvCompany.setTypeface(typeface2);
 
         tvFbGroupTitleABoutUs.setOnClickListener(this);
         tvFbLinkAboutUs.setOnClickListener(this);
         cardView.setOnClickListener(this);
+
+        tv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.setVisibility(View.VISIBLE);
+                cardView.setVisibility(View.INVISIBLE);
+                cardView2.setVisibility(View.INVISIBLE);
+                tv1.setVisibility(View.INVISIBLE);
+                cardView3.setVisibility(View.INVISIBLE);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("http://www.techeasesol.com/");
+            }
+        });
+        tvCompany.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.setVisibility(View.VISIBLE);
+                cardView.setVisibility(View.INVISIBLE);
+                cardView2.setVisibility(View.INVISIBLE);
+                tv1.setVisibility(View.INVISIBLE);
+                cardView3.setVisibility(View.INVISIBLE);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("http://www.techeasesol.com/");
+            }
+        });
+        cardView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                webView.setVisibility(View.VISIBLE);
+                cardView.setVisibility(View.INVISIBLE);
+                cardView2.setVisibility(View.INVISIBLE);
+                tv1.setVisibility(View.INVISIBLE);
+                cardView3.setVisibility(View.INVISIBLE);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("https://www.techeasesol.com/");
+            }
+        });
         return view;
     }
 

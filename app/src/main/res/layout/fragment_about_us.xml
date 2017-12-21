@@ -17,9 +17,24 @@
         android:textColor="#129FDd"
         android:textStyle="bold"
         android:id="@+id/tvTitleABoutUs"/>
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/webView1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone"
+            />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -35,6 +50,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
         <TextView
+            android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="About PFD"
@@ -42,15 +58,20 @@
             android:textSize="17sp"
             android:textColor="#129FDD"
             android:textStyle="bold"/>
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
     <TextView
+        android:id="@+id/tvLongText"
         android:layout_width="match_parent"
         android:layout_height="250sp"
         android:padding="5sp"
         android:textSize="15sp"
         android:text="@string/large_text"/>
+            </android.support.v4.widget.NestedScrollView>
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</ScrollView>
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -77,9 +98,10 @@
         <TextView
             android:id="@+id/tvFbLInkABoutUs"
             android:layout_width="wrap_content"
-            android:layout_height="50sp"
+            android:layout_height="wrap_content"
             android:text="  https://www.facebook.com/kpkfoodies/"
             android:padding="5sp"
+            android:textSize="15sp"
             />
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -98,6 +120,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
         <TextView
+            android:id="@+id/tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Developed By"
@@ -111,13 +134,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5sp"
-                android:text="Techease Solutions"
+                android:text="Techease Solutions
+
+    Adam Noor "
+                android:textSize="15sp"
                 />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-    <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/webView1"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        />
+    </LinearLayout>
+    </FrameLayout>
+    </ScrollView>
+
 </LinearLayout>
