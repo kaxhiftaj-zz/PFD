@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -48,7 +49,8 @@ public class BestDeal extends Fragment {
     SharedPreferences.Editor editor;
     String api_token;
     MaterialSearchBar searchView;
-
+    ProgressBar progressBar;
+    int progressbarstatus = 0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,6 +63,8 @@ public class BestDeal extends Fragment {
         searchEducationList();
         if(CheckNetwork.isInternetAvailable(getActivity()))
         {
+            progressBar=(ProgressBar)view.findViewById(R.id.progress_barRestDetails);
+
             sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
             api_token=sharedPreferences.getString("api_token","");
@@ -111,7 +115,8 @@ public class BestDeal extends Fragment {
     }
 
     private void apicall() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        setProgressValue(progressbarstatus);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://pfd.techeasesol.com/api/v1/featured?api_token="+api_token
                 , new Response.Listener<String>() {
             @Override
@@ -134,7 +139,7 @@ public class BestDeal extends Fragment {
                         model.setResturantImage(InnerMostObj.getString("image_url"));
 
                         bestDealModels.add(model);
-                     //   progressBar.setVisibility(View.INVISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
 
                     }
                     bestDealAdapter.notifyDataSetChanged();
@@ -147,7 +152,7 @@ public class BestDeal extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-             //   progressBar.setVisibility(View.INVISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
                 Log.d("error" , String.valueOf(error.getCause()));
 
             }
@@ -170,5 +175,22 @@ public class BestDeal extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(stringRequest);
     }
+    private void setProgressValue(final int progress) {
 
+        // set the progress
+        progressBar.setProgress(progress);
+        // thread is used to change the progress value
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                setProgressValue(progress + 10);
+            }
+        });
+        thread.start();
+    }
 }

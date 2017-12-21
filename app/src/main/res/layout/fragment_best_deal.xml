@@ -15,7 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/svBestdeal" />
-
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvBestDeal"
@@ -23,4 +25,15 @@
         android:layout_margin="5sp"
         android:layout_height="match_parent"
         ></android.support.v7.widget.RecyclerView>
+    <ProgressBar
+        android:id="@+id/progress_barBestDeal"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="50sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:max="100"
+        android:progress="0" />
+</FrameLayout>
 </LinearLayout>

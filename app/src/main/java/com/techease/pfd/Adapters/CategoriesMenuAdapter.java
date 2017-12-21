@@ -68,13 +68,12 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
 
                 sharedPreferences = context.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
                 editor = sharedPreferences.edit();
-
-               holder.ratingBar.setRating(rating);
+                holder.ratingBar.setRating(rating);
                 holder.ratingBar.setIsIndicator(true);
-                 menu_id=model.getItemId();
-              tokenId=sharedPreferences.getString("api_token","");
-               reviewMessage="This is review";
-                 ratingValue=String.valueOf(rating);
+                menu_id=model.getItemId();
+                tokenId=sharedPreferences.getString("api_token","");
+                reviewMessage="This is review";
+                ratingValue=String.valueOf(rating);
                 apicall();
 
 
@@ -107,6 +106,8 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
 //                    }
 //                });
 //                pDialog.show();
+
+                Toast.makeText(context, "Item Already rated", Toast.LENGTH_SHORT).show();
                 Log.d("zma error", String.valueOf(error.getCause()));
             }
         }) {
