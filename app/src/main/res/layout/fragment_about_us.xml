@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.techease.pfd.Fragments.AboutUsFrag">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="70sp"
+        android:text="ABOUT US"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5sp"
+        android:textColor="#129FDd"
+        android:textStyle="bold"
+        android:id="@+id/tvTitleABoutUs"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10sp"
+        android:text="@string/large_text"/>
+</ScrollView>
+</LinearLayout>

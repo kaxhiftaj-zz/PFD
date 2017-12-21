@@ -51,9 +51,10 @@ public class BestDealAdapter extends RecyclerView.Adapter<BestDealAdapter.MyView
         String checkFeatured=bestDealModel.getFeatured();
         if (checkFeatured.equals("1"))
         {
-             holder.id=bestDealModel.getId();
+            holder.id=bestDealModel.getId();
             holder.itemPrice.setText(bestDealModel.getItemPrice());
             holder.ItemFeatured.setText("Featured");
+            holder.featuredImage.setImageResource(R.drawable.feactured);
             holder.ItemDes.setText(bestDealModel.getItemDes());
             holder.itemName.setText(bestDealModel.getItemName());
             Glide.with(context).load(bestDealModel.getResturantImage()).into(holder.restImage);
@@ -107,6 +108,7 @@ public class BestDealAdapter extends RecyclerView.Adapter<BestDealAdapter.MyView
             ItemFeatured.setOnClickListener(this);
             ItemDes.setOnClickListener(this);
             featuredImage.setOnClickListener(this);
+            restImage.setOnClickListener(this);
 
         }
 

@@ -129,7 +129,6 @@ public class BestDeal extends Fragment {
                     {
                         JSONObject temp = jsonArr.getJSONObject(i);
                         BestDealModel model=new BestDealModel();
-                        model.setId(temp.getString("id"));
                         model.setFeatured(temp.getString("featured"));
                         JSONObject Obj=temp.getJSONObject("menu");
                         model.setItemDes(Obj.getString("description"));
@@ -138,6 +137,7 @@ public class BestDeal extends Fragment {
                         JSONObject InnerObj=Obj.getJSONObject("menu_category");
                         JSONObject InnerMostObj=InnerObj.getJSONObject("resturant");
                         model.setResturantImage(InnerMostObj.getString("image_url"));
+                        model.setId(InnerMostObj.getString("id"));
 
                         bestDealModels.add(model);
                         progressBar.setVisibility(View.INVISIBLE);

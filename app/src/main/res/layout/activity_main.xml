@@ -16,6 +16,11 @@
         android:layout_marginTop="120sp"
         android:layout_gravity="center"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20sp"
+        android:orientation="vertical">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -29,7 +34,6 @@
     android:textSize="16sp"
     android:textStyle="bold"
     android:paddingLeft="20sp"
-    android:gravity="center"
     android:drawableLeft="@drawable/facebook_logo"
     android:layout_margin="20sp"/>
     <com.facebook.login.widget.LoginButton
@@ -37,21 +41,12 @@
         android:layout_width="270sp"
         android:layout_height="50sp"
         android:layout_gravity="center"
-        android:background="@drawable/loginbutton"
-        android:drawableLeft="@drawable/facebook_logo"
-        android:drawablePadding="20sp"
-        android:gravity="center"
-        android:paddingLeft="20sp"
         android:text="Log In With Facebook"
-        android:textColor="#fff"
-        android:textSize="16sp"
-        android:paddingBottom="5sp"
         android:textStyle="bold" />
     </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:gravity="center"
         android:orientation="horizontal">
         <View
@@ -92,4 +87,5 @@
         android:textSize="16sp"
         android:layout_gravity="center"
         />
+    </LinearLayout>
 </LinearLayout>
