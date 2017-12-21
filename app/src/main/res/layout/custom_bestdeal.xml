@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="#fff"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:layout_marginLeft="10sp"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="5sp"
         card_view:cardCornerRadius="10dp"
         card_view:cardBackgroundColor="#eee"
         card_view:cardPreventCornerOverlap="true"
@@ -25,16 +25,18 @@
         android:id="@+id/ivCustomBestDeal"
         android:layout_width="110sp"
         android:layout_height="110sp"
+        android:scaleType="fitXY"
         android:background="#eee"/>
     </android.support.v7.widget.CardView>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="5sp"
         android:layout_marginLeft="10sp"
         android:orientation="vertical"
         android:layout_weight="1">
         <TextView
+            android:id="@+id/tvItemNameBestDeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BURGER KING"
@@ -43,6 +45,7 @@
             android:textStyle="bold"
             />
         <TextView
+            android:id="@+id/tvFeaturedBestDeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="VALUE MEAL"
@@ -51,20 +54,17 @@
             android:textColor="#BDBDBD"
             />
         <TextView
+            android:id="@+id/tvDesBestDeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2 BURGERS"
+            android:text="2 BURGERS
+FRIES, 2 DRINKS"
             android:layout_marginTop="10sp"
             android:textSize="16sp"
             android:textColor="#BDBDBD"/>
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FRIES, 2 DRINKS "
-            android:textSize="16sp"
-            android:textColor="#BDBDBD"
-            />
-        <TextView
+            android:id="@+id/tvitemPriceBestDeal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ONLY ON 799/-"
@@ -74,12 +74,13 @@
             android:layout_marginTop="10sp"/>
     </LinearLayout>
 <ImageView
+    android:id="@+id/ivCustomBestDealFeatured"
     android:layout_width="0dp"
     android:layout_height="50sp"
     android:src="@drawable/feactured"
     android:layout_gravity="right|center"
     android:layout_weight="0.4"
-    android:layout_marginBottom="25sp"/>
+    android:layout_marginBottom="35sp"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

@@ -6,6 +6,9 @@
             android:id="@+id/MainScreen"
             android:title="PFD" />
         <item
+            android:id="@+id/bestdeal"
+            android:title="BESTDEAL"/>
+        <item
             android:id="@+id/nav_FbGraph"
             android:title="FACEBOOK POST"/>
         <item

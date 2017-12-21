@@ -23,6 +23,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.Fragments.AllResturentFrag;
+import com.techease.pfd.Fragments.BestDeal;
 import com.techease.pfd.Fragments.CoupansFrag;
 import com.techease.pfd.Fragments.FbGraphFrag;
 import com.techease.pfd.R;
@@ -132,7 +133,9 @@ public class Dashboard extends AppCompatActivity
         }  else if (id == R.id.nav_manage) {
             Fragment fragmentCoupan=new CoupansFrag();
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).commit();
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.bestdeal) {
+            Fragment fragmentBestDeal=new BestDeal();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentBestDeal).commit();
 
         } else if (id == R.id.nav_send) {
 
