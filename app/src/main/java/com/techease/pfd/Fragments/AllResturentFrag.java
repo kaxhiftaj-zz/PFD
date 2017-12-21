@@ -97,8 +97,10 @@ public class AllResturentFrag extends Fragment {
                 // Toast.makeText(TrafficSigns.this, "Query is: "+query, Toast.LENGTH_SHORT).show();
                 List<Pesh_FD_Model> newData = new ArrayList<>();
                 for (int j = 0; j < PFDmodels.size(); j++) {
+                    final String test = PFDmodels.get(j).getImageUrl().toLowerCase();
                     final String test2 = PFDmodels.get(j).getRestName().toLowerCase();
-
+                    final String test3=PFDmodels.get(j).getId().toLowerCase();
+                    final String test4=PFDmodels.get(j).getLocation().toLowerCase();
                     if (test2.startsWith(String.valueOf(query))) {
                         newData.add(PFDmodels.get(j));
                     }
@@ -198,4 +200,5 @@ public class AllResturentFrag extends Fragment {
         });
         thread.start();
     }
+
 }

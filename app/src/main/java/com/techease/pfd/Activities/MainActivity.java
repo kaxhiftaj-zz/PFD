@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnEmail;
+    Button btnEmail,btnFb;
     private LoginButton FBloginButton;
     CallbackManager callbackManager;
     String provider_id,email,name,provider,device_type,device_token;
@@ -58,63 +58,65 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         device_type="Android";
         device_token=android_id;
-        callbackManager = CallbackManager.Factory.create();
         FBloginButton=(LoginButton) findViewById(R.id.btnFb);
-        FBloginButton.setHeight(100);
-        FBloginButton.setOnClickListener(new View.OnClickListener() {
+        btnFb=(Button)findViewById(R.id.FbBtn);
+        callbackManager = CallbackManager.Factory.create();
+        btnFb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (v==btnFb)
+                {
+                    FBloginButton.performClick();
+                    FBloginButton.setReadPermissions("email");
+                    FBloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+                        @Override
+                        public void onSuccess(LoginResult loginResult) {
 
+                            String accessToken = loginResult.getAccessToken().getToken();
+                            provider_id = accessToken;
+                            editor.putString("api_tokenFB",provider_id);
+                            editor.commit();
+                            GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
-                FBloginButton.setReadPermissions("email");
-                FBloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-
-                        String accessToken = loginResult.getAccessToken().getToken();
-                        provider_id = accessToken;
-                        editor.putString("api_tokenFB",provider_id);
-                        editor.commit();
-                        GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                Log.i("LoginActivity", response.toString());
-                                // Get facebook data from login
-                                editor.putString("token",provider_id);
-                                editor.commit();
-                                try {
-                                    id=object.getString("id");
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                @Override
+                                public void onCompleted(JSONObject object, GraphResponse response) {
+                                    Log.i("LoginActivity", response.toString());
+                                    // Get facebook data from login
+                                    editor.putString("token",provider_id);
+                                    editor.commit();
+                                    try {
+                                        id=object.getString("id");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    startActivity(new Intent(MainActivity.this,Dashboard.class));
                                 }
-                                startActivity(new Intent(MainActivity.this,Dashboard.class));
-                            }
-                        });
-                        Bundle parameters = new Bundle();
-                        parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
-                        request.setParameters(parameters);
-                        request.executeAsync();
-                    }
+                            });
+                            Bundle parameters = new Bundle();
+                            parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+                            request.setParameters(parameters);
+                            request.executeAsync();
+                          //  apiCall();
+                        }
 
-                    @Override
-                    public void onCancel() {
+                        @Override
+                        public void onCancel() {
 
-                        Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "cancel", Toast.LENGTH_SHORT).show();
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(FacebookException error) {
+                        @Override
+                        public void onError(FacebookException error) {
 
-                        Toast.makeText(MainActivity.this, String.valueOf(error.getCause()), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, String.valueOf(error.getCause()), Toast.LENGTH_SHORT).show();
 
-                    }
-                });
+                        }
+                    });
 
+                }
             }
         });
-
 
 
         btnEmail=(Button)findViewById(R.id.btnEmail);
@@ -163,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("zma error", String.valueOf(error));
-                DialogUtils.showWarningAlertDialog(MainActivity.this, String.valueOf(error.getCause()));
+//                DialogUtils.showWarningAlertDialog(MainActivity.this, String.valueOf(error.getCause()));
             }
         }) {
             @Override

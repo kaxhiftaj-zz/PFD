@@ -11,6 +11,16 @@ public class BestDealModel {
     private String ItemDes;
     private String ResturantImage;
 
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
+    }
+
+    private String Id;
+
     private String featured;
 
     public String getFeatured() {

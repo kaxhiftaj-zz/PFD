@@ -97,13 +97,13 @@
             android:layout_marginBottom="120dp"
             android:layout_gravity="bottom|end"
             android:layout_marginRight="@dimen/fab_margin"
-            app:backgroundTint="#fff"
+            app:backgroundTint="#eee"
             app:elevation="6dp"
             android:alpha="0.3"
-            android:scaleType="fitStart"
-            android:visibility="gone"
+            android:scaleType="fitXY"
+           android:visibility="gone"
             app:pressedTranslationZ="12dp"
-            android:src="@drawable/bback" />
+            android:src="@drawable/back" />
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab1"
             android:layout_width="40sp"
@@ -114,8 +114,8 @@
             android:visibility="gone"
             app:elevation="6dp"
             android:alpha="0.3"
-            android:scaleType="fitStart"
-            app:backgroundTint="#fff"
+            android:scaleType="fitXY"
+            app:backgroundTint="#eee"
             app:pressedTranslationZ="12dp"
             android:src="@drawable/next" />
         <android.support.design.widget.FloatingActionButton

@@ -60,10 +60,10 @@ public class BestDeal extends Fragment {
         //Declaration
         recyclerView=(RecyclerView)view.findViewById(R.id.rvBestDeal);
         searchView=(MaterialSearchBar) view.findViewById(R.id.svBestdeal);
+        progressBar=(ProgressBar)view.findViewById(R.id.progress_barBestDeal);
         searchEducationList();
         if(CheckNetwork.isInternetAvailable(getActivity()))
         {
-            progressBar=(ProgressBar)view.findViewById(R.id.progress_barRestDetails);
 
             sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
@@ -129,6 +129,7 @@ public class BestDeal extends Fragment {
                     {
                         JSONObject temp = jsonArr.getJSONObject(i);
                         BestDealModel model=new BestDealModel();
+                        model.setId(temp.getString("id"));
                         model.setFeatured(temp.getString("featured"));
                         JSONObject Obj=temp.getJSONObject("menu");
                         model.setItemDes(Obj.getString("description"));

@@ -79,7 +79,6 @@ public class ResutrantDetail extends Fragment implements View.OnClickListener {
         //Resturent Id get from All Resturent Fragment
         restId=getArguments().getString("restId");
 
-
      //  progressBar=(ProgressBar)view.findViewById(R.id.progress_barRest_Detail);
         sharedPreferences = getActivity().getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();

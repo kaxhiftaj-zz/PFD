@@ -1,11 +1,18 @@
 package com.techease.pfd.Activities;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 
 import com.techease.pfd.Activities.Intro.IntroActivity;
 import com.techease.pfd.R;
+
+import java.security.MessageDigest;
 
 public class Splash extends AppCompatActivity {
 
@@ -24,7 +31,7 @@ public class Splash extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-
+                        getHasKey();
                     startActivity(new Intent(Splash.this, IntroActivity.class));
                     finish();
                 }
@@ -33,5 +40,28 @@ public class Splash extends AppCompatActivity {
         timer.start();
 
 
+    }
+    //Method for generating keyhash value
+    void getHasKey()
+    {
+        //Get Has Key
+        try
+        {
+            PackageInfo info = getPackageManager().getPackageInfo("techease.com.postcard", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures)
+            {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
