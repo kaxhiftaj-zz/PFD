@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,6 +79,35 @@ public class BestDeal extends Fragment {
     }
 
     private void searchEducationList() {
+        searchView.addTextChangeListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence query, int i, int i1, int i2) {
+                Log.d("LOG_TAG", getClass().getSimpleName() + " text changed " + searchView.getText());
+
+                query = query.toString().toLowerCase();
+                // Toast.makeText(TrafficSigns.this, "Query is: "+query, Toast.LENGTH_SHORT).show();
+                List<BestDealModel> newData = new ArrayList<>();
+                for (int j = 0; j < bestDealModels.size(); j++) {
+                    final String test2 = bestDealModels.get(j).getItemName().toLowerCase();
+
+                    if (test2.startsWith(String.valueOf(query))) {
+                        newData.add(bestDealModels.get(j));
+                    }
+                }
+                // specify an adapter (see also next example)
+                bestDealAdapter = new BestDealAdapter(getActivity(), newData);
+                recyclerView.setAdapter(bestDealAdapter);
+                bestDealAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void apicall() {

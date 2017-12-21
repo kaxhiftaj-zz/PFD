@@ -30,7 +30,7 @@ public class BestDealAdapter extends RecyclerView.Adapter<BestDealAdapter.MyView
         this.context=context;
         this.dealModels=bestDealModels;
     }
-    
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_bestdeal,parent,false);
