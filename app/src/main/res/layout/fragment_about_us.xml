@@ -3,25 +3,121 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#eee"
     tools:context="com.techease.pfd.Fragments.AboutUsFrag">
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="70sp"
         android:text="ABOUT US"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginTop="5sp"
+       android:background="#fff"
         android:textColor="#129FDd"
         android:textStyle="bold"
         android:id="@+id/tvTitleABoutUs"/>
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardUseCompatPadding="true"
+        android:id="@+id/cardViewCustomPesh_FD">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About PFD"
+            android:padding="5sp"
+            android:textSize="17sp"
+            android:textColor="#129FDD"
+            android:textStyle="bold"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10sp"
+        android:layout_height="250sp"
+        android:padding="5sp"
+        android:textSize="15sp"
         android:text="@string/large_text"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </ScrollView>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardUseCompatPadding="true"
+        android:id="@+id/card2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvFbGroupABoutUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Facebook Group"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:textColor="#129FDD"
+            android:padding="5sp"/>
+        <TextView
+            android:id="@+id/tvFbLInkABoutUs"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:text="  https://www.facebook.com/kpkfoodies/"
+            android:padding="5sp"
+            />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardBackgroundColor="#fff"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardUseCompatPadding="true"
+        android:id="@+id/card3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Developed By"
+            android:padding="5sp"
+            android:textSize="17sp"
+            android:textColor="#129FDD"
+            android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvCompany"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="Techease Solutions"
+                />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <WebView  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/webView1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        />
 </LinearLayout>

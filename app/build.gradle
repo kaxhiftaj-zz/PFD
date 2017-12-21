@@ -48,6 +48,7 @@ dependencies {
     compile 'com.facebook.android:facebook-places:[4,5)'
     compile 'com.facebook.android:facebook-messenger:[4,5)'
     compile 'com.facebook.android:facebook-applinks:[4,5)'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
     testCompile 'junit:junit:4.12'
 }
 configurations.all {

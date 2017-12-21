@@ -16,7 +16,7 @@
             android:title="COUPANS" />
 
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/aboutus"
             android:title="ABOUT US" />
         <item
             android:id="@+id/nav_send"

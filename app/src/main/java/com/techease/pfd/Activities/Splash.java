@@ -27,11 +27,13 @@ public class Splash extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
+       // ImageView imageView=(ImageView)findViewById(R.id.ivGifSplashScreen);
+
 
         Thread timer = new Thread() {
             public void run() {
                 try {
-                    sleep(2000);
+                    sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
