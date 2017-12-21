@@ -55,7 +55,7 @@ public class IntroActivity extends AppIntro {
         // Do something when users tap on Done button.
 
 
-        Intent intent = new Intent(IntroActivity.this, MainActivity.class);
+            Intent intent = new Intent(IntroActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }

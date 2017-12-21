@@ -84,6 +84,8 @@ String restId,api_token,catId;
                                 model.setItemName(Obj.getString("item_name"));
                                 model.setItemDes(Obj.getString("description"));
                                 model.setItemPrice(Obj.getString("price"));
+                                model.setItemId(Obj.getString("id"));
+                                model.setItemCategory(Obj.getString("menu_category_id"));
                                 JSONArray ratingArray=Obj.getJSONArray("rating");
                                 for (int z=0; z<ratingArray.length(); z++)
                                 {
