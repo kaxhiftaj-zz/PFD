@@ -6,17 +6,6 @@
     android:background="#eee"
     tools:context="com.techease.pfd.Fragments.AboutUsFrag">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="70sp"
-        android:text="ABOUT US"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_gravity="center"
-       android:background="#fff"
-        android:textColor="#129FDd"
-        android:textStyle="bold"
-        android:id="@+id/tvTitleABoutUs"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,7 +21,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,6 +31,7 @@
         android:clickable="true"
         card_view:cardCornerRadius="8dp"
         card_view:cardBackgroundColor="#fff"
+        android:layout_marginTop="10sp"
         card_view:cardPreventCornerOverlap="true"
         card_view:cardUseCompatPadding="true"
         android:id="@+id/cardViewCustomPesh_FD">
@@ -49,26 +39,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="50sp"
+                    android:layout_height="50sp"
+                    android:src="@drawable/appicon"
+                    android:padding="10sp"/>
         <TextView
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="About PFD"
-            android:padding="5sp"
-            android:textSize="17sp"
-            android:textColor="#129FDD"
-            android:textStyle="bold"/>
-            <android.support.v4.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            android:text="PFD"
+            android:padding="10sp"
+            android:textSize="20sp"
+            android:textColor="#129FDD" />
+            </LinearLayout>
     <TextView
         android:id="@+id/tvLongText"
         android:layout_width="match_parent"
-        android:layout_height="250sp"
+        android:layout_height="100sp"
         android:padding="5sp"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:text="@string/large_text"/>
-            </android.support.v4.widget.NestedScrollView>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -84,27 +79,78 @@
         android:id="@+id/card2">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/face"
+                    android:padding="10sp"/>
         <TextView
             android:id="@+id/tvFbGroupABoutUs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Facebook Group"
+            android:text="FACEBOOK GROUP"
             android:textStyle="bold"
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:textColor="#129FDD"
             android:padding="5sp"/>
+            </LinearLayout>
         <TextView
             android:id="@+id/tvFbLInkABoutUs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  https://www.facebook.com/kpkfoodies/"
+            android:text="Peshawar Food Diaries"
             android:padding="5sp"
-            android:textSize="15sp"
+            android:textSize="16sp"
             />
         </LinearLayout>
     </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            card_view:cardCornerRadius="8dp"
+            card_view:cardBackgroundColor="#fff"
+            card_view:cardPreventCornerOverlap="true"
+            card_view:cardUseCompatPadding="true"
+            android:id="@+id/card4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/earth"
+                        android:padding="10sp"/>
+            <TextView
+                android:id="@+id/tvVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VERSION"
+                android:textSize="18sp"
+                android:textColor="#129FDD"
+                android:padding="5sp"
+                android:textStyle="bold"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.0.1"
+                    android:textSize="16sp"
+                    android:padding="5sp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -119,26 +165,49 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/developer"
+                    android:padding="10sp"/>
         <TextView
             android:id="@+id/tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Developed By"
+            android:text="DEVELOPED BY"
             android:padding="5sp"
-            android:textSize="17sp"
+            android:textSize="18sp"
             android:textColor="#129FDD"
             android:textStyle="bold"/>
-
+            </LinearLayout>
             <TextView
                 android:id="@+id/tvCompany"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5sp"
-                android:text="Techease Solutions
-
-    Adam Noor "
-                android:textSize="15sp"
+                android:text="Techease Solutions"
+                android:textSize="16sp"
                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="20sp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/world"
+                    android:paddingLeft="5sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="www.techeasesol.com"
+                    android:textSize="15sp"
+                    android:padding="5sp"/>
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
     </LinearLayout>
