@@ -37,12 +37,12 @@
             android:background="#BDBDBD"
             android:layout_marginLeft="10sp"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="125sp"
+            android:layout_marginBottom="90sp"
 
             />
         <ImageView
-            android:layout_width="150sp"
-            android:layout_height="100sp"
+            android:layout_width="100sp"
+            android:layout_height="70sp"
             android:layout_gravity="bottom|center"
             android:layout_marginBottom="15sp"
             android:background="@drawable/logoinlight"/>

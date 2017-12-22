@@ -6,6 +6,9 @@
             android:id="@+id/MainScreen"
             android:title="PFD" />
         <item
+            android:id="@+id/addingRecipe"
+            android:title="RECIPE"/>
+        <item
             android:id="@+id/bestdeal"
             android:title="BESTDEAL"/>
         <item
