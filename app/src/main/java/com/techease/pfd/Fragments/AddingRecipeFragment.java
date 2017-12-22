@@ -25,8 +25,8 @@ public class AddingRecipeFragment extends Fragment {
     Button   btnTag1,btnTag2,btnTag3,btnTag4,btnTag5,btnAddImage,btnSubmitRecipe,btnAddNewetIng,btnAddNewetIns;
     Typeface typeface,typeface2;
     LinearLayout parentLayout,parentLayout2;
-    private int hint=2;
-    private int hint2=2;
+     int hint=2;
+     int hint2=2;
       @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class AddingRecipeFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_adding_recipe, container, false);
 
         parentLayout=(LinearLayout)view.findViewById(R.id.parentLayout);
-        parentLayout=(LinearLayout)view.findViewById(R.id.parentLayout2);
+        parentLayout2=(LinearLayout)view.findViewById(R.id.parentLayout2);
         typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
         typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         tvTitle=(TextView)view.findViewById(R.id.tvTitle);
@@ -102,21 +102,23 @@ public class AddingRecipeFragment extends Fragment {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params.setMargins(0,10,0,10);
-        EditText edittTxt = new EditText(getActivity());
+        EditText editText = new EditText(getActivity());
         int maxLength = 5;
-        hint2++;
-        edittTxt.setHint("Add Instruction "+hint2);
-        edittTxt.setLayoutParams(params);
-        edittTxt.setHeight(50);
-        edittTxt.setPadding(10,0,0,0);
-        edittTxt.setBackgroundResource(R.drawable.edittext_back);
-        edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
-        edittTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
-        edittTxt.setId(hint2);
+        hint++;
+        editText.setHint("Add Ingredients "+hint);
+        editText.setLayoutParams(params);
+        editText.setHeight(50);
+        editText.setTypeface(typeface2);
+        editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
+        editText.setPadding(12,0,12,0);
+        editText.setBackgroundResource(R.drawable.edittext_back);
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
+        editText.setId(hint);
         InputFilter[] fArray = new InputFilter[1];
         fArray[0] = new InputFilter.LengthFilter(maxLength);
-        edittTxt.setFilters(fArray);
-        parentLayout2.addView(edittTxt);
+        editText.setFilters(fArray);
+        parentLayout2.addView(editText);
     }
 
     private void createEditTextViewIns() {
@@ -127,15 +129,17 @@ public class AddingRecipeFragment extends Fragment {
         params.setMargins(0,10,0,10);
         EditText edittTxt = new EditText(getActivity());
         int maxLength = 5;
-        hint++;
-        edittTxt.setHint("Add Instruction "+hint);
+        hint2++;
+        edittTxt.setHint("Add Instruction "+hint2);
         edittTxt.setLayoutParams(params);
         edittTxt.setHeight(50);
-        edittTxt.setPadding(10,0,0,0);
+        edittTxt.setTypeface(typeface2);
+        edittTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
+        edittTxt.setPadding(12,0,12,0);
         edittTxt.setBackgroundResource(R.drawable.edittext_back);
         edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
         edittTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
-        edittTxt.setId(hint);
+        edittTxt.setId(hint2);
         InputFilter[] fArray = new InputFilter[1];
         fArray[0] = new InputFilter.LengthFilter(maxLength);
         edittTxt.setFilters(fArray);
