@@ -17,7 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -42,7 +41,7 @@ public class AddingRecipeFragment extends Fragment {
     EditText etTitle,etIngredients,etInstructions,etTime;
     Button   btnTag1,btnTag2,btnTag3,btnTag4,btnTag5,btnAddImage,btnSubmitRecipe,btnAddNewetIng,btnAddNewetIns;
     Typeface typeface,typeface2;
-    LinearLayout parentLayout,parentLayout2;
+    LinearLayout InstructionLayout,IngredientsLayout;
      int hint=0;
      int hint2=0;
      int ivId=0;
@@ -59,8 +58,8 @@ public class AddingRecipeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_adding_recipe, container, false);
 
-        parentLayout=(LinearLayout) view.findViewById(R.id.parentLayout);
-        parentLayout2=(LinearLayout) view.findViewById(R.id.parentLayout2);
+        InstructionLayout=(LinearLayout) view.findViewById(R.id.parentLayoutInstructions);
+        IngredientsLayout=(LinearLayout) view.findViewById(R.id.parentLayoutingredients);
         typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
         typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         tvTitle=(TextView)view.findViewById(R.id.tvTitle);
@@ -258,12 +257,12 @@ public class AddingRecipeFragment extends Fragment {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
         params.setMargins(0,10,0,10);
         final EditText editText = new EditText(getActivity());
         final ImageView imageView=new ImageView(getActivity());
         imageView.setImageResource(R.drawable.delete);
-        imageView.setPadding(250,0,0,0);
+        imageView.setPadding(350,0,0,0);
         int maxLength = 5;
         hint++;
         ivId2++;
@@ -281,27 +280,28 @@ public class AddingRecipeFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentLayout.removeView(editText);
-                parentLayout.removeView(imageView);
+                IngredientsLayout.removeView(editText);
+                IngredientsLayout.removeView(imageView);
             }
         });
         InputFilter[] fArray = new InputFilter[1];
         fArray[0] = new InputFilter.LengthFilter(maxLength);
         editText.setFilters(fArray);
-        parentLayout2.addView(editText);
+        IngredientsLayout.addView(editText);
+        IngredientsLayout.addView(imageView);
 
     }
 
     private void createEditTextViewIns() {
-        final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams (
-                FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.WRAP_CONTENT);
-     //   params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.setMargins(0,10,10,10);
+        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT);
+        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        params.setMargins(0,10,0,10);
         final EditText edittTxt = new EditText(getActivity());
         final ImageView imageView=new ImageView(getActivity());
         imageView.setImageResource(R.drawable.delete);
-        imageView.setPadding(250,0,0,0);
+        imageView.setPadding(350,0,0,0);
         int maxLength = 5;
         hint2++;
         ivId++;
@@ -322,12 +322,12 @@ public class AddingRecipeFragment extends Fragment {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentLayout.removeView(edittTxt);
-                parentLayout.removeView(imageView);
+                InstructionLayout.removeView(edittTxt);
+                InstructionLayout.removeView(imageView);
             }
         });
-        parentLayout.addView(edittTxt);
-        parentLayout.addView(imageView);
+        InstructionLayout.addView(edittTxt);
+        InstructionLayout.addView(imageView);
     }
 
 
