@@ -26,9 +26,9 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.techease.pfd.Utils.DialogUtils;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
+import com.techease.pfd.Utils.DialogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         device_type="Android";
         device_token=android_id;
-        FBloginButton=(LoginButton) findViewById(R.id.btnFb);
         btnFb=(Button)findViewById(R.id.FbBtn);
+        FBloginButton=(LoginButton) findViewById(R.id.btnFb);
         callbackManager = CallbackManager.Factory.create();
         btnFb.setOnClickListener(new View.OnClickListener() {
             @Override

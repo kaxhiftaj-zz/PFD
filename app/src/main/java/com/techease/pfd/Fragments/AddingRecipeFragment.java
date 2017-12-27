@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -44,19 +45,22 @@ public class AddingRecipeFragment extends Fragment {
     LinearLayout parentLayout,parentLayout2;
      int hint=0;
      int hint2=0;
-     int btnId=0;
+     int ivId=0;
+     int ivId2=0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO=2;
     final CharSequence[] items = { "Take Photo", "Choose from Library","Cancel" };
     String mCurrentPhotoPath;
+    EditText customEditText;
+    ImageView customImageView;
       @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_adding_recipe, container, false);
 
-        parentLayout=(LinearLayout)view.findViewById(R.id.parentLayout);
-        parentLayout2=(LinearLayout)view.findViewById(R.id.parentLayout2);
+        parentLayout=(LinearLayout) view.findViewById(R.id.parentLayout);
+        parentLayout2=(LinearLayout) view.findViewById(R.id.parentLayout2);
         typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
         typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         tvTitle=(TextView)view.findViewById(R.id.tvTitle);
@@ -99,6 +103,20 @@ public class AddingRecipeFragment extends Fragment {
         btnAddNewetIns.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                LayoutInflater inflater = (LayoutInflater)getActivity(). getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+//                View view1 = inflater.inflate(R.layout.custom_edittext, null, false);
+//                parentLayout.addView(view1);
+//                customEditText=(EditText)view1.findViewById(R.id.etCustomEt);
+//                customImageView=(ImageView)view1.findViewById(R.id.ivDelete);
+//                customImageView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        customEditText.setVisibility(View.GONE);
+//                        customImageView.setVisibility(View.GONE);
+//                        parentLayout.removeView(customEditText);
+//                    }
+//                });
 
                 String EmptyOrNot=etInstructions.getText().toString();
                 if (EmptyOrNot.equals(""))
@@ -150,6 +168,14 @@ public class AddingRecipeFragment extends Fragment {
                     }
                 });
                 builder.show();
+            }
+        });
+
+        btnSubmitRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String test=customEditText.getText().toString();
+                Toast.makeText(getActivity(), test, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -235,11 +261,15 @@ public class AddingRecipeFragment extends Fragment {
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params.setMargins(0,10,0,10);
         final EditText editText = new EditText(getActivity());
+        final ImageView imageView=new ImageView(getActivity());
+        imageView.setImageResource(R.drawable.delete);
+        imageView.setPadding(250,0,0,0);
         int maxLength = 5;
         hint++;
+        ivId2++;
         editText.setHint("Add Ingredients "+hint);
         editText.setLayoutParams(params);
-        editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
+      //  editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
         editText.setHeight(50);
         editText.setTypeface(typeface2);
         editText.setPadding(12,0,12,0);
@@ -247,6 +277,14 @@ public class AddingRecipeFragment extends Fragment {
         editText.setInputType(InputType.TYPE_CLASS_TEXT);
         editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
         editText.setId(hint);
+        imageView.setId(ivId2);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentLayout.removeView(editText);
+                parentLayout.removeView(imageView);
+            }
+        });
         InputFilter[] fArray = new InputFilter[1];
         fArray[0] = new InputFilter.LengthFilter(maxLength);
         editText.setFilters(fArray);
@@ -255,28 +293,41 @@ public class AddingRecipeFragment extends Fragment {
     }
 
     private void createEditTextViewIns() {
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        final FrameLayout.LayoutParams params = new FrameLayout.LayoutParams (
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT);
+     //   params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params.setMargins(0,10,10,10);
-        EditText edittTxt = new EditText(getActivity());
+        final EditText edittTxt = new EditText(getActivity());
+        final ImageView imageView=new ImageView(getActivity());
+        imageView.setImageResource(R.drawable.delete);
+        imageView.setPadding(250,0,0,0);
         int maxLength = 5;
         hint2++;
+        ivId++;
         edittTxt.setHint("Add Instruction "+hint2);
         edittTxt.setLayoutParams(params);
         edittTxt.setHeight(50);
         edittTxt.setTypeface(typeface2);
-        edittTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
+      //  edittTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
         edittTxt.setPadding(12,0,12,0);
         edittTxt.setBackgroundResource(R.drawable.edittext_back);
         edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
         edittTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
         edittTxt.setId(hint2);
+        imageView.setId(ivId);
         InputFilter[] fArray = new InputFilter[1];
         fArray[0] = new InputFilter.LengthFilter(maxLength);
         edittTxt.setFilters(fArray);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parentLayout.removeView(edittTxt);
+                parentLayout.removeView(imageView);
+            }
+        });
         parentLayout.addView(edittTxt);
+        parentLayout.addView(imageView);
     }
 
 
