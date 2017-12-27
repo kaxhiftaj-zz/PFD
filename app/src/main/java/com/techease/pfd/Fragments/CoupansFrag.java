@@ -24,7 +24,6 @@ import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
 import com.techease.pfd.Utils.CheckNetwork;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,16 +79,13 @@ public class CoupansFrag extends Fragment {
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
-                    JSONArray jsonArr=jsonObject.getJSONArray("data");
-                    for(int i=0; i<jsonArr.length(); i++)
-                    {
-                        JSONObject object=jsonArr.getJSONObject(i);
+                    JSONObject object=jsonObject.getJSONObject("data");
                         CoupanName.setText(object.getString("coupon_code"));
                         CoupanTime.setText(object.getString("expiry"));
                         DiscountNo.setText(object.getString("discount"));
                         DiscountType.setText(object.getString("discount_type"));
                         progressBar.setVisibility(View.INVISIBLE);
-                    }
+
                 } catch (JSONException e) {
                     progressBar.setVisibility(View.INVISIBLE);
                     e.printStackTrace();

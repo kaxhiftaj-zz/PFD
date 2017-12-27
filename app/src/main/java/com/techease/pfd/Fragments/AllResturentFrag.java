@@ -177,7 +177,7 @@ public class AllResturentFrag extends Fragment {
 
         };
         RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(200000,
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(stringRequest);

@@ -1,7 +1,13 @@
 package com.techease.pfd.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -11,22 +17,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.techease.pfd.R;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class AddingRecipeFragment extends Fragment {
 
+    ImageView imageView;
     TextView tvTitle,tvIngredients,tvInstructions,tvTags,tvTime;
     EditText etTitle,etIngredients,etInstructions,etTime;
     Button   btnTag1,btnTag2,btnTag3,btnTag4,btnTag5,btnAddImage,btnSubmitRecipe,btnAddNewetIng,btnAddNewetIns;
     Typeface typeface,typeface2;
     LinearLayout parentLayout,parentLayout2;
-     int hint=2;
-     int hint2=2;
+     int hint=0;
+     int hint2=0;
+     int btnId=0;
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    static final int REQUEST_TAKE_PHOTO=2;
+    final CharSequence[] items = { "Take Photo", "Choose from Library","Cancel" };
+    String mCurrentPhotoPath;
       @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,6 +60,7 @@ public class AddingRecipeFragment extends Fragment {
         typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
         typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         tvTitle=(TextView)view.findViewById(R.id.tvTitle);
+        imageView=(ImageView)view.findViewById(R.id.ivAddingImages);
         tvTime=(TextView)view.findViewById(R.id.tvTime);
         tvInstructions=(TextView)view.findViewById(R.id.tvInstructions);
         tvIngredients=(TextView)view.findViewById(R.id.tvIngredients);
@@ -77,6 +100,12 @@ public class AddingRecipeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
+                String EmptyOrNot=etInstructions.getText().toString();
+                if (EmptyOrNot.equals(""))
+                {
+                    etInstructions.setError("First add an instruction");
+                }
+                else
                 createEditTextViewIns();
 
             }
@@ -85,15 +114,118 @@ public class AddingRecipeFragment extends Fragment {
         btnAddNewetIng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String EmptyOrNot=etIngredients.getText().toString();
+                if (EmptyOrNot.equals(""))
+                {
+                    etIngredients.setError("First add an ingredients");
+                }
+                else
+                    createEditTextViewIng();
+            }
+        });
 
-                createEditTextViewIng();
+        btnAddImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Add Photo!");
+                builder.setItems(items, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        if (items[which].equals("Take Photo"))
+                        {
+                            callCamera();
+                        }
+                        else if (items[which].equals("Choose from Library"))
+                        {
+                            callGallery();
+                        }
+                        else if (items[which].equals("Cancel"))
+                        {
+                            dialog.dismiss();
+                        }
+
+                    }
+                });
+                builder.show();
             }
         });
 
 
-
-
           return view;
+    }
+
+    private void callGallery() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
+        //intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"),REQUEST_TAKE_PHOTO);
+    }
+
+    private void callCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+
+            onCaptureImageResult(data);
+        }
+        else if (requestCode==REQUEST_TAKE_PHOTO)
+        {
+            onSelectFromGalleryResult(data);
+
+        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+
+        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File destination = new File(Environment.getExternalStorageDirectory(),
+                System.currentTimeMillis() + ".jpg");
+        FileOutputStream fo;
+        try {
+            destination.createNewFile();
+            fo = new FileOutputStream(destination);
+            fo.write(bytes.toByteArray());
+            fo.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        imageView.setImageBitmap(thumbnail);
+    }
+
+    private void onSelectFromGalleryResult(Intent data) {
+
+//        InputStream stream;
+//        try {
+//            stream = getActivity().getContentResolver().openInputStream(data.getData());
+//            Bitmap realImage = BitmapFactory.decodeStream(stream);
+//            imageView.setImageBitmap(realImage);
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
+        Bitmap bm=null;
+        if (data != null) {
+            try {
+                bm = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), e.getCause().toString(), Toast.LENGTH_SHORT).show();
+            }
+            imageView.setImageBitmap(bm);
+        }
     }
 
     private void createEditTextViewIng() {
@@ -102,14 +234,14 @@ public class AddingRecipeFragment extends Fragment {
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         params.setMargins(0,10,0,10);
-        EditText editText = new EditText(getActivity());
+        final EditText editText = new EditText(getActivity());
         int maxLength = 5;
         hint++;
         editText.setHint("Add Ingredients "+hint);
         editText.setLayoutParams(params);
+        editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
         editText.setHeight(50);
         editText.setTypeface(typeface2);
-        editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
         editText.setPadding(12,0,12,0);
         editText.setBackgroundResource(R.drawable.edittext_back);
         editText.setInputType(InputType.TYPE_CLASS_TEXT);
@@ -119,6 +251,7 @@ public class AddingRecipeFragment extends Fragment {
         fArray[0] = new InputFilter.LengthFilter(maxLength);
         editText.setFilters(fArray);
         parentLayout2.addView(editText);
+
     }
 
     private void createEditTextViewIns() {
@@ -126,7 +259,7 @@ public class AddingRecipeFragment extends Fragment {
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        params.setMargins(0,10,0,10);
+        params.setMargins(0,10,10,10);
         EditText edittTxt = new EditText(getActivity());
         int maxLength = 5;
         hint2++;
@@ -145,4 +278,6 @@ public class AddingRecipeFragment extends Fragment {
         edittTxt.setFilters(fArray);
         parentLayout.addView(edittTxt);
     }
+
+
 }

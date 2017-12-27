@@ -40,7 +40,7 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     String menu_id,tokenId,reviewMessage,ratingValue;
-
+    float rate;
 
     public CategoriesMenuAdapter(Context context, List<CategoriesMenuModel> cmodel) {
         this.context=context;
@@ -69,7 +69,7 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
                 sharedPreferences = context.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
                 editor = sharedPreferences.edit();
                 holder.ratingBar.setRating(rating);
-                holder.ratingBar.setIsIndicator(true);
+                holder.ratingBar.isIndicator();
                 menu_id=model.getItemId();
                 tokenId=sharedPreferences.getString("api_token","");
                 reviewMessage="This is review";
@@ -160,12 +160,16 @@ public class CategoriesMenuAdapter extends RecyclerView.Adapter<CategoriesMenuAd
         TextView ItemName,ItemPrice,ItemDes;
         Typeface typeface,typeface2;
         RatingBar ratingBar;
+        SharedPreferences sharedPreferences;
+        SharedPreferences.Editor editor;
         public MyViewHolder(View itemView) {
             super(itemView);
             ItemName=(TextView)itemView.findViewById(R.id.tvCatItemName);
             ItemDes=(TextView)itemView.findViewById(R.id.tvCatItemDes);
             ItemPrice=(TextView)itemView.findViewById(R.id.tvCatItemPrice);
             ratingBar=(RatingBar)itemView.findViewById(R.id.ratingBarItem);
+            sharedPreferences = context.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
 
             typeface=Typeface.createFromAsset(context.getAssets(),"font/brandon_reg.otf");
             typeface2=Typeface.createFromAsset(context.getAssets(),"font/brandon_bld.otf");
