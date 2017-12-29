@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 
 public class AllResturentFrag extends Fragment {
@@ -47,10 +48,11 @@ public class AllResturentFrag extends Fragment {
     Pesh_FD_Adapter pesh_fd_adapter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    String api_token,image,name,id,locatoin;
+    String api_token,strCheckComma,image,name,id,locatoin;
     ProgressBar progressBar;
     int progressbarstatus = 0;
     MaterialSearchBar searchView;
+    StringTokenizer stringTokenizer;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -94,18 +96,13 @@ public class AllResturentFrag extends Fragment {
                 Log.d("LOG_TAG", getClass().getSimpleName() + " text changed " + searchView.getText());
 
                 query = query.toString().toLowerCase();
-                // Toast.makeText(TrafficSigns.this, "Query is: "+query, Toast.LENGTH_SHORT).show();
                 List<Pesh_FD_Model> newData = new ArrayList<>();
                 for (int j = 0; j < PFDmodels.size(); j++) {
-                    final String test = PFDmodels.get(j).getImageUrl().toLowerCase();
                     final String test2 = PFDmodels.get(j).getRestName().toLowerCase();
-                    final String test3=PFDmodels.get(j).getId().toLowerCase();
-                    final String test4=PFDmodels.get(j).getLocation().toLowerCase();
                     if (test2.startsWith(String.valueOf(query))) {
                         newData.add(PFDmodels.get(j));
                     }
                 }
-                // specify an adapter (see also next example)
                 pesh_fd_adapter = new Pesh_FD_Adapter(getActivity(), newData);
                 recyclerView.setAdapter(pesh_fd_adapter);
                 pesh_fd_adapter.notifyDataSetChanged();
@@ -116,6 +113,10 @@ public class AllResturentFrag extends Fragment {
             }
         });
     }
+
+
+
+
     private void apicall() {
         progressBar.setVisibility(View.VISIBLE);
        setProgressValue(progressbarstatus);
@@ -133,7 +134,12 @@ public class AllResturentFrag extends Fragment {
                             Pesh_FD_Model model=new Pesh_FD_Model();
                             name=temp.getString("name");
                             id=temp.getString("id");
-                            locatoin=temp.getString("location");
+                          strCheckComma=locatoin=temp.getString("location");
+                          stringTokenizer=new StringTokenizer(strCheckComma,",");
+                          while (stringTokenizer.hasMoreTokens())
+                          {
+                              Toast.makeText(getActivity(), stringTokenizer.nextToken(), Toast.LENGTH_SHORT).show();
+                          }
                             image=temp.getString("image_url");
                             model.setRestName(temp.getString("name"));
                             model.setId(temp.getString("id"));
@@ -146,6 +152,7 @@ public class AllResturentFrag extends Fragment {
                             }
 
                             PFDmodels.add(model);
+
                             progressBar.setVisibility(View.INVISIBLE);
 
                         }
@@ -182,6 +189,21 @@ public class AllResturentFrag extends Fragment {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(stringRequest);
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        apicall();
+        pesh_fd_adapter=new Pesh_FD_Adapter(getActivity(),PFDmodels);
+        recyclerView.setAdapter(pesh_fd_adapter);
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        PFDmodels.clear();
+    }
+
     private void setProgressValue(final int progress) {
 
         // set the progress

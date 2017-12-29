@@ -9,17 +9,17 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.text.InputFilter;
-import android.text.InputType;
-import android.util.TypedValue;
+import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,26 +30,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static android.app.Activity.RESULT_OK;
 
 
-public class AddingRecipeFragment extends Fragment {
+public class AddingRecipeFragment extends Fragment implements View.OnClickListener {
 
-    ImageView imageView;
+    ImageView imageView,btnAddNewetIng,btnAddNewetIns,ivCross;
     TextView tvTitle,tvIngredients,tvInstructions,tvTags,tvTime;
     EditText etTitle,etIngredients,etInstructions,etTime;
-    Button   btnTag1,btnTag2,btnTag3,btnTag4,btnTag5,btnAddImage,btnSubmitRecipe,btnAddNewetIng,btnAddNewetIns;
+    Button   btnTag1,btnTag2,btnTag3,btnTag4,btnTag5,btnSubmitRecipe;
     Typeface typeface,typeface2;
     LinearLayout InstructionLayout,IngredientsLayout;
+    FrameLayout frameLayoutInstruction,frameLayoutIngredients;
+    ArrayList<EditText> ingredientList = new ArrayList();
+    ArrayList<EditText> instructionList = new ArrayList<>();
+    ArrayList<ImageView> ingredientImageViewList = new ArrayList();
+    ArrayList<ImageView> instructionImageViewList = new ArrayList<>();
      int hint=0;
-     int hint2=0;
-     int ivId=0;
-     int ivId2=0;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO=2;
     final CharSequence[] items = { "Take Photo", "Choose from Library","Cancel" };
-    String mCurrentPhotoPath;
+    String strIngredients,strInstructions;
     EditText customEditText;
     ImageView customImageView;
       @Override
@@ -60,10 +63,13 @@ public class AddingRecipeFragment extends Fragment {
 
         InstructionLayout=(LinearLayout) view.findViewById(R.id.parentLayoutInstructions);
         IngredientsLayout=(LinearLayout) view.findViewById(R.id.parentLayoutingredients);
+        frameLayoutIngredients=(FrameLayout)view.findViewById(R.id.frameLayoutIngredients);
+        frameLayoutInstruction=(FrameLayout)view.findViewById(R.id.frameLayoutInstructions);
         typeface=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_blk.otf");
         typeface2=Typeface.createFromAsset(getActivity().getAssets(),"font/brandon_reg.otf");
         tvTitle=(TextView)view.findViewById(R.id.tvTitle);
         imageView=(ImageView)view.findViewById(R.id.ivAddingImages);
+        ivCross=(ImageView)view.findViewById(R.id.ivCross);
         tvTime=(TextView)view.findViewById(R.id.tvTime);
         tvInstructions=(TextView)view.findViewById(R.id.tvInstructions);
         tvIngredients=(TextView)view.findViewById(R.id.tvIngredients);
@@ -71,6 +77,12 @@ public class AddingRecipeFragment extends Fragment {
         etTitle=(EditText)view.findViewById(R.id.etTitle);
         etIngredients=(EditText)view.findViewById(R.id.etIngredients);
         etInstructions=(EditText)view.findViewById(R.id.etInstrunctions);
+          btnAddNewetIng=(ImageView)view.findViewById(R.id.btnAddIng);
+          btnAddNewetIns=(ImageView)view.findViewById(R.id.btnAddIns);
+          instructionList.add(etInstructions);
+          ingredientList.add(etIngredients);
+          ingredientImageViewList.add(btnAddNewetIng);
+          instructionImageViewList.add(btnAddNewetIns);
         etTime=(EditText)view.findViewById(R.id.etTime);
         btnTag1=(Button)view.findViewById(R.id.btnTag1);
         btnTag2=(Button)view.findViewById(R.id.btnTag2);
@@ -78,9 +90,6 @@ public class AddingRecipeFragment extends Fragment {
         btnTag4=(Button)view.findViewById(R.id.btnTag4);
         btnTag5=(Button)view.findViewById(R.id.btnTag5);
         btnSubmitRecipe=(Button)view.findViewById(R.id.btnSubmitRecipe);
-        btnAddImage=(Button)view.findViewById(R.id.btnAddImage);
-        btnAddNewetIng=(Button)view.findViewById(R.id.btnAddIng);
-        btnAddNewetIns=(Button)view.findViewById(R.id.btnAddIns);
 
         tvTags.setTypeface(typeface);
         tvTitle.setTypeface(typeface);
@@ -91,7 +100,6 @@ public class AddingRecipeFragment extends Fragment {
         etInstructions.setTypeface(typeface2);
         etIngredients.setTypeface(typeface2);
         etTitle.setTypeface(typeface2);
-        btnAddImage.setTypeface(typeface);
         btnSubmitRecipe.setTypeface(typeface);
         btnTag1.setTypeface(typeface);
         btnTag2.setTypeface(typeface);
@@ -99,52 +107,9 @@ public class AddingRecipeFragment extends Fragment {
         btnTag4.setTypeface(typeface);
         btnTag5.setTypeface(typeface);
 
-        btnAddNewetIns.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                LayoutInflater inflater = (LayoutInflater)getActivity(). getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
-//                View view1 = inflater.inflate(R.layout.custom_edittext, null, false);
-//                parentLayout.addView(view1);
-//                customEditText=(EditText)view1.findViewById(R.id.etCustomEt);
-//                customImageView=(ImageView)view1.findViewById(R.id.ivDelete);
-//                customImageView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        customEditText.setVisibility(View.GONE);
-//                        customImageView.setVisibility(View.GONE);
-//                        parentLayout.removeView(customEditText);
-//                    }
-//                });
-
-                String EmptyOrNot=etInstructions.getText().toString();
-                if (EmptyOrNot.equals(""))
-                {
-                    etInstructions.setError("First add an instruction");
-                }
-                else
-                createEditTextViewIns();
-
-            }
-        });
-
-        btnAddNewetIng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String EmptyOrNot=etIngredients.getText().toString();
-                if (EmptyOrNot.equals(""))
-                {
-                    etIngredients.setError("First add an ingredients");
-                }
-                else
-                    createEditTextViewIng();
-            }
-        });
-
-        btnAddImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Add Photo!");
                 builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -170,11 +135,73 @@ public class AddingRecipeFragment extends Fragment {
             }
         });
 
+          etInstructions.addTextChangedListener(new TextWatcher() {
+              @Override
+              public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+              }
+
+              @Override
+              public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+              }
+
+              @Override
+              public void afterTextChanged(Editable editable) {
+                  if (editable.length() < 1) {
+                      btnAddNewetIns.setVisibility(View.INVISIBLE);
+                  } else {
+                      btnAddNewetIns.setVisibility(View.VISIBLE);
+                  }
+              }
+          });
+
+
+          etIngredients.addTextChangedListener(new TextWatcher() {
+              @Override
+              public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+              }
+
+              @Override
+              public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+              }
+
+              @Override
+              public void afterTextChanged(Editable editable) {
+                  if (editable.length() < 1) {
+                      btnAddNewetIng.setVisibility(View.INVISIBLE);
+                  } else {
+                      btnAddNewetIng.setVisibility(View.VISIBLE);
+                  }
+              }
+          });
+
+          btnAddNewetIng.setOnClickListener(this);
+          btnAddNewetIns.setOnClickListener(this);
+          btnTag1.setOnClickListener(this);
+          btnTag2.setOnClickListener(this);
+          btnTag3.setOnClickListener(this);
+          btnTag4.setOnClickListener(this);
+          btnTag5.setOnClickListener(this);
+
+
+
+
         btnSubmitRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String test=customEditText.getText().toString();
-                Toast.makeText(getActivity(), test, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        ivCross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                imageView.setImageResource(R.drawable.img);
+                ivCross.setVisibility(View.GONE);
             }
         });
 
@@ -198,6 +225,7 @@ public class AddingRecipeFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        ivCross.setVisibility(View.VISIBLE);
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
             onCaptureImageResult(data);
@@ -208,6 +236,7 @@ public class AddingRecipeFragment extends Fragment {
 
         }
     }
+
 
     private void onCaptureImageResult(Intent data) {
 
@@ -231,16 +260,6 @@ public class AddingRecipeFragment extends Fragment {
     }
 
     private void onSelectFromGalleryResult(Intent data) {
-
-//        InputStream stream;
-//        try {
-//            stream = getActivity().getContentResolver().openInputStream(data.getData());
-//            Bitmap realImage = BitmapFactory.decodeStream(stream);
-//            imageView.setImageBitmap(realImage);
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
         Bitmap bm=null;
         if (data != null) {
             try {
@@ -253,82 +272,159 @@ public class AddingRecipeFragment extends Fragment {
         }
     }
 
-    private void createEditTextViewIng() {
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        params.setMargins(0,10,0,10);
-        final EditText editText = new EditText(getActivity());
-        final ImageView imageView=new ImageView(getActivity());
-        imageView.setImageResource(R.drawable.delete);
-        imageView.setPadding(350,0,0,0);
-        int maxLength = 5;
-        hint++;
-        ivId2++;
-        editText.setHint("Add Ingredients "+hint);
-        editText.setLayoutParams(params);
-      //  editText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
-        editText.setHeight(50);
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+
+            case R.id.btnAddIng:
+                btnAddNewetIng.setVisibility(View.INVISIBLE);
+                addEditTextForIngredients();
+                break;
+            case R.id.btnAddIns:
+                btnAddNewetIns.setVisibility(View.INVISIBLE);
+                addEditTextForInstructions();
+                break;
+        }
+    }
+
+    private void addEditTextForInstructions() {
+        instructionImageViewList.get(instructionImageViewList.size() - 1).setVisibility(View.INVISIBLE);
+        final FrameLayout frameLayout = new FrameLayout(getActivity());
+        frameLayout.setLayoutParams(frameLayoutInstruction.getLayoutParams());
+        frameLayout.setTag(instructionList.size());
+       EditText editText = new EditText(getActivity());
+        editText.setLayoutParams(etInstructions.getLayoutParams());
+        editText.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.edittext_back));
+        editText.setHint("Add Instruction");
         editText.setTypeface(typeface2);
-        editText.setPadding(12,0,12,0);
-        editText.setBackgroundResource(R.drawable.edittext_back);
-        editText.setInputType(InputType.TYPE_CLASS_TEXT);
-        editText.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
-        editText.setId(hint);
-        imageView.setId(ivId2);
+        hint++;
+        editText.setPadding(etInstructions.getPaddingLeft(), 0, 0, 0);
+        frameLayout.addView(editText);
+        final ImageView imageView = new ImageView(getActivity());
+        imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.delete));
+        imageView.setLayoutParams(btnAddNewetIns.getLayoutParams());
+        frameLayout.addView(imageView);
+        imageView.setTag(0);
+        imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.delete));
+        instructionImageViewList.add(imageView);
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() < 1) {
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.delete));
+                    imageView.setTag(0);
+                } else {
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.plus));
+                    imageView.setTag(1);
+                }
+
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IngredientsLayout.removeView(editText);
-                IngredientsLayout.removeView(imageView);
+                if ((int) (imageView.getTag()) == 1) {
+                    addEditTextForInstructions();
+                } else {
+                    InstructionLayout.removeView(frameLayout);
+                    instructionList.remove((int) (frameLayout.getTag()));
+                    instructionImageViewList.remove((int) (frameLayout.getTag()));
+                    instructionImageViewList.get(instructionImageViewList.size() - 1).setVisibility(View.VISIBLE);
+
+                }
             }
         });
-        InputFilter[] fArray = new InputFilter[1];
-        fArray[0] = new InputFilter.LengthFilter(maxLength);
-        editText.setFilters(fArray);
-        IngredientsLayout.addView(editText);
-        IngredientsLayout.addView(imageView);
+        InstructionLayout.addView(frameLayout);
+        instructionList.add(editText);
+
+    }
+    public void takeDataFromFields() {
+        strIngredients = "";
+        strInstructions = "";
+        for (EditText etIngred : ingredientList) {
+            strIngredients += etIngred.getText().toString() + ",";
+        }
+        for (EditText etInstruc : instructionList) {
+            strInstructions += etInstruc.getText().toString() + ",";
+        }
+        strIngredients = strIngredients.substring(0, strIngredients.length() - 1);
+        strInstructions = strInstructions.substring(0, strInstructions.length() - 1);
 
     }
 
-    private void createEditTextViewIns() {
-        final RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams (
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        params.setMargins(0,10,0,10);
-        final EditText edittTxt = new EditText(getActivity());
-        final ImageView imageView=new ImageView(getActivity());
-        imageView.setImageResource(R.drawable.delete);
-        imageView.setPadding(350,0,0,0);
-        int maxLength = 5;
-        hint2++;
-        ivId++;
-        edittTxt.setHint("Add Instruction "+hint2);
-        edittTxt.setLayoutParams(params);
-        edittTxt.setHeight(50);
-        edittTxt.setTypeface(typeface2);
-      //  edittTxt.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.delete, 0);
-        edittTxt.setPadding(12,0,12,0);
-        edittTxt.setBackgroundResource(R.drawable.edittext_back);
-        edittTxt.setInputType(InputType.TYPE_CLASS_TEXT);
-        edittTxt.setTextSize(TypedValue.COMPLEX_UNIT_SP,17);
-        edittTxt.setId(hint2);
-        imageView.setId(ivId);
-        InputFilter[] fArray = new InputFilter[1];
-        fArray[0] = new InputFilter.LengthFilter(maxLength);
-        edittTxt.setFilters(fArray);
+    private void addEditTextForIngredients() {
+        ingredientImageViewList.get(ingredientImageViewList.size() - 1).setVisibility(View.INVISIBLE);
+        final FrameLayout frameLayout = new FrameLayout(getActivity());
+        frameLayout.setLayoutParams(frameLayoutIngredients.getLayoutParams());
+        frameLayout.setTag(ingredientList.size());
+        EditText  editText = new EditText(getActivity());
+        editText.setLayoutParams(etIngredients.getLayoutParams());
+        editText.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.edittext_back));
+        editText.setHint("Add Ingredient");
+        editText.setTypeface(typeface2);
+        editText.setPadding(etIngredients.getPaddingLeft(), 0, 0, 0);
+        frameLayout.addView(editText);
+        final ImageView imageView = new ImageView(getActivity());
+        imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.delete));
+        imageView.setLayoutParams(btnAddNewetIng.getLayoutParams());
+        frameLayout.addView(imageView);
+        imageView.setTag(0);
+        imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.delete));
+        ingredientImageViewList.add(imageView);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.length() < 1) {
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.delete));
+                    imageView.setTag(0);
+                } else {
+                    imageView.setVisibility(View.VISIBLE);
+                    imageView.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.plus));
+                    imageView.setTag(1);
+                }
+
+            }
+        });
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                InstructionLayout.removeView(edittTxt);
-                InstructionLayout.removeView(imageView);
+            public void onClick(View view) {
+                if ((int) (imageView.getTag()) == 1) {
+                    addEditTextForIngredients();
+                } else {
+                    IngredientsLayout.removeView(frameLayout);
+                    ingredientList.remove((int) (frameLayout.getTag()));
+                    ingredientImageViewList.remove((int) (frameLayout.getTag()));
+                    ingredientImageViewList.get(ingredientImageViewList.size() - 1).setVisibility(View.VISIBLE);
+
+                }
             }
         });
-        InstructionLayout.addView(edittTxt);
-        InstructionLayout.addView(imageView);
+        IngredientsLayout.addView(frameLayout);
+        ingredientList.add(editText);
     }
-
 
 }

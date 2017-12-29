@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.techease.pfd.Activities.MainActivity;
@@ -29,14 +30,14 @@ public class IntroActivity extends AppIntro {
         sharedPreferences = getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         String token=sharedPreferences.getString("api_token","");
-        String FbToken=sharedPreferences.getString("token","");
+        Log.d("token",token);
         if (!token.equals(""))
         {
             startActivity(new Intent(IntroActivity.this,Dashboard.class));
             finish();
-        }else if(!FbToken.equals(""))
-        {
-            startActivity(new Intent(IntroActivity.this,Dashboard.class));
+        }
+        else{
+            startActivity(new Intent(IntroActivity.this,MainActivity.class));
             finish();
         }
 

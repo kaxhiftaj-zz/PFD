@@ -27,17 +27,17 @@ import com.techease.pfd.Fragments.AddingRecipeFragment;
 import com.techease.pfd.Fragments.AllResturentFrag;
 import com.techease.pfd.Fragments.BestDeal;
 import com.techease.pfd.Fragments.CoupansFrag;
-import com.techease.pfd.Fragments.FbGraphFrag;
+import com.techease.pfd.Fragments.Setting;
 import com.techease.pfd.R;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Typeface typeface;
-    TextView textView;
+    Typeface typeface,typeface2;
+    TextView tvUserName,tvUserEmail;
     SharedPreferences sharedprefs;
     SharedPreferences.Editor editor;
-    String name;
+    String fname,lname,email;
     Fragment fragment;
 
     @Override
@@ -51,13 +51,20 @@ public class Dashboard extends AppCompatActivity
         View headerLayout = navigationView.getHeaderView(0);
 
         typeface = Typeface.createFromAsset(getAssets(), "font/brandon_blk.otf");
-        textView = (TextView) headerLayout.findViewById(R.id.tvUserName);
+        typeface=Typeface.createFromAsset(getAssets(),"font/brandon_reg.otf");
+        tvUserName = (TextView) headerLayout.findViewById(R.id.tvUserName);
+        tvUserEmail=(TextView)headerLayout.findViewById(R.id.tvAddress);
+        tvUserName.setTypeface(typeface);
+        tvUserEmail.setTypeface(typeface2);
 
         sharedprefs = this.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedprefs.edit();
-        name = sharedprefs.getString("name", "");
-        if (name != null) {
-            textView.setText(name);
+        fname = sharedprefs.getString("fname", "");
+        lname=sharedprefs.getString("lname","");
+        email=sharedprefs.getString("email","");
+        if (fname != null) {
+            tvUserName.setText(fname+" "+lname);
+            tvUserEmail.setText(email);
         }
 
         fragment = new AllResturentFrag();
@@ -115,6 +122,7 @@ public class Dashboard extends AppCompatActivity
         if (id == R.id.logout) {
             FacebookSdk.sdkInitialize(getApplicationContext());
             LoginManager.getInstance().logOut();
+            editor.putString("api_token"," ").commit();
             startActivity(new Intent(Dashboard.this, MainActivity.class));
             finish();
             return true;
@@ -134,23 +142,24 @@ public class Dashboard extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentGraph).commit();
         }  else if (id == R.id.nav_manage) {
             Fragment fragmentCoupan=new CoupansFrag();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).addToBackStack("abc").commit();
         } else if (id == R.id.bestdeal) {
             Fragment fragmentBestDeal=new BestDeal();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentBestDeal).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentBestDeal).addToBackStack("abc").commit();
 
         }else if (id==R.id.addingRecipe){
             Fragment fragmentCoupan=new AddingRecipeFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).addToBackStack("abc").commit();
         }
         else if (id == R.id.aboutus) {
             Fragment fragmentCoupan=new AboutUsFrag();
-            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentCoupan).addToBackStack("abc").commit();
 
-        }else if (id==R.id.nav_FbGraph)
+        }
+        else if (id==R.id.nav_setting)
         {
-       Fragment fragmentGraph=new FbGraphFrag();
-       getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentGraph).commit();
+            Fragment fragmentSetting=new Setting();
+            getSupportFragmentManager().beginTransaction().replace(R.id.container,fragmentSetting).addToBackStack("abc").commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

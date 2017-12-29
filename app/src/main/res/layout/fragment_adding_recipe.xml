@@ -148,6 +148,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/frameLayoutIngredients"
                >
             <EditText
                 android:id="@+id/etIngredients"
@@ -156,14 +157,16 @@
                 android:layout_marginTop="10sp"
                 android:paddingLeft="10sp"
                 android:hint="Add ingredients 1"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:background="@drawable/edittext_back"
                 android:paddingRight="10sp"/>
-                <Button
+                <ImageView
                     android:id="@+id/btnAddIng"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:background="@drawable/plus"
+                    android:clickable="true"
+                    android:visibility="invisible"
                     android:layout_gravity="end|center_vertical"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="5sp"/>
@@ -189,6 +192,7 @@
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/frameLayoutInstructions"
                    >
             <EditText
                 android:id="@+id/etInstrunctions"
@@ -196,55 +200,52 @@
                 android:layout_height="50sp"
                 android:background="@drawable/edittext_back"
                 android:hint="Add Instructions 1"
+                android:maxLines="1"
                 android:paddingLeft="10sp"
                 android:layout_marginTop="10sp"/>
-                <Button
+                <ImageView
                     android:id="@+id/btnAddIns"
                     android:layout_width="20sp"
                     android:layout_height="20sp"
                     android:background="@drawable/plus"
+                    android:clickable="true"
                     android:layout_gravity="end|center_vertical"
+                    android:visibility="invisible"
                     android:layout_marginRight="10sp"
                     android:layout_marginTop="5sp"/>
                     </FrameLayout>
                 </LinearLayout>
-            <ImageView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200sp"
-                android:id="@+id/ivAddingImages"
-                android:layout_marginTop="10sp"
-                android:scaleType="fitXY"
-                android:src="@drawable/img"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-            <Button
-                android:id="@+id/btnAddImage"
-                android:layout_width="100sp"
-                android:layout_height="50sp"
-                android:text="Add"
-                android:textSize="17sp"
-                android:layout_marginRight="10sp"
-                android:background="@drawable/button"
-                android:textColor="#fff"
-                android:layout_marginBottom="10sp"
-                android:layout_marginTop="10sp"/>
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200sp"
+                    android:id="@+id/ivAddingImages"
+                    android:layout_marginTop="10sp"
+                    android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:src="@drawable/img"/>
+                <ImageView
+                    android:id="@+id/ivCross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/clear"
+                    android:layout_gravity="right"
+                    android:visibility="gone"
+                    android:layout_margin="10sp"/>
+            </FrameLayout>
+
                 <Button
                     android:id="@+id/btnSubmitRecipe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40sp"
                     android:text="Submit recipe"
                     android:textSize="17sp"
                     android:background="@drawable/button"
                     android:textColor="#fff"
-                    android:paddingLeft="5sp"
-                    android:paddingRight="5sp"
-                    android:layout_marginLeft="10sp"
                     android:layout_marginBottom="10sp"
                     android:layout_marginTop="10sp"/>
-            </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

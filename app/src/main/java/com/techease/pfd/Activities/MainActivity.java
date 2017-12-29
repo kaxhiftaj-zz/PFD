@@ -28,7 +28,6 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.techease.pfd.Configuration.Links;
 import com.techease.pfd.R;
-import com.techease.pfd.Utils.DialogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnEmail,btnFb;
     private LoginButton FBloginButton;
     CallbackManager callbackManager;
-    String provider_id,email,name,provider,device_type,device_token;
-    String id,story;
+    String provider_id,email,name,provider,device_type,device_token,Fb_token;
+    String id,location,first_name,last_name,birthday,Useremail,gender;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     @Override
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             //for getting device token
         String android_id = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-
+        provider="Facebook";
         sharedPreferences = this.getSharedPreferences(Links.MyPrefs, Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
         device_type="Android";
@@ -66,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (v==btnFb)
                 {
+                   // editor.putString("api_token","").commit();
                     FBloginButton.performClick();
                     FBloginButton.setReadPermissions("email");
                     FBloginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -74,18 +74,31 @@ public class MainActivity extends AppCompatActivity {
 
                             String accessToken = loginResult.getAccessToken().getToken();
                             provider_id = accessToken;
-                            editor.putString("api_tokenFB",provider_id);
-                            editor.commit();
+                            editor.putString("accesstoken",provider_id).commit();
                             GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
                                 @Override
                                 public void onCompleted(JSONObject object, GraphResponse response) {
-                                    Log.i("LoginActivity", response.toString());
+                                    Log.i("LoginActivity", object.toString());
                                     // Get facebook data from login
-                                    editor.putString("token",provider_id);
-                                    editor.commit();
+
                                     try {
                                         id=object.getString("id");
+                                        first_name=object.getString("first_name");
+                                       Useremail=object.getString("email");
+                                       last_name=object.getString("last_name");
+
+                                        apiCall();
+
+                                        editor.putString("userId",id);
+                                        editor.putString("fname",first_name);
+                                        editor.putString("lname",last_name);
+                                        editor.putString("email",Useremail).commit();
+
+                                        Log.d("zmaId",id);
+                                        Log.d("zmaLname",last_name);
+                                        Log.d("zmaFname",first_name);
+                                        Log.d("zmaEmail",Useremail);
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
@@ -93,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
                             Bundle parameters = new Bundle();
-                            parameters.putString("fields", "id, first_name, last_name, email,gender, birthday, location"); // Parámetros que pedimos a facebook
+                            parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location"); // Parámetros que pedimos a facebook
                             request.setParameters(parameters);
                             request.executeAsync();
-                          //  apiCall();
+
                         }
 
                         @Override
@@ -141,23 +154,20 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.d("zma  reg response", response);
 //                DialogUtils.sweetAlertDialog.dismiss();
-                if (response.contains("true")) {
+
                     try {
-                        JSONObject jsonObject = new JSONObject(response).getJSONObject("message");
-                            editor.putString("api_token", device_token);
-                            editor.putString("name",name);
-                            editor.commit();
-                            Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        JSONObject jsonObject = new JSONObject(response).getJSONObject("data");
+
+                            Fb_token=jsonObject.getString("api_token");
+                            Log.d("zmazma",Fb_token);
+                            editor.putString("api_token",Fb_token).commit();
+                            Toast.makeText(MainActivity.this, "You have been logged in through your facebook account", Toast.LENGTH_LONG).show();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
                     startActivity(new Intent(MainActivity.this, Dashboard.class));
-
-                } else   {
-                    DialogUtils.showWarningAlertDialog(MainActivity.this, "Something went wrong");
-                }
 
 
             }
@@ -176,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("name", name);
+                params.put("email", Useremail);
+                params.put("name", first_name+" "+last_name);
                 params.put("provider_id", provider_id);
                 params.put("provider", provider);
                 params.put("device_type",device_type);

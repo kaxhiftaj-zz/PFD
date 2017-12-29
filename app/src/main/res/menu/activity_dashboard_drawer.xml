@@ -11,9 +11,7 @@
         <item
             android:id="@+id/bestdeal"
             android:title="BESTDEAL"/>
-        <item
-            android:id="@+id/nav_FbGraph"
-            android:title="FACEBOOK POST"/>
+
         <item
             android:id="@+id/nav_manage"
             android:title="COUPANS" />
@@ -22,7 +20,7 @@
             android:id="@+id/aboutus"
             android:title="ABOUT US" />
         <item
-            android:id="@+id/nav_send"
+            android:id="@+id/nav_setting"
             android:title="SETTING" />
     </group>
 

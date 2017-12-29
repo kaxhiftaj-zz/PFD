@@ -23,34 +23,47 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_dashboard"
         app:menu="@menu/activity_dashboard_drawer" >
-        <View
-            android:layout_width="30sp"
-            android:layout_height="3sp"
-            android:background="#BDBDBD"
-            android:layout_marginLeft="10sp"
-            android:layout_marginTop="150sp"
 
-            />
-        <View
-            android:layout_width="30sp"
-            android:layout_height="3sp"
-            android:background="#BDBDBD"
-            android:layout_marginLeft="10sp"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="90sp"
+        <RelativeLayout
+            android:layout_width="200sp"
+            android:layout_height="match_parent">
 
-            />
-        <ImageView
-            android:layout_width="100sp"
-            android:layout_height="70sp"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="15sp"
-            android:background="@drawable/logoinlight"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TECHEASE SOLUTIONS"
-            android:textColor="#f2f2f2"
-            android:layout_gravity="bottom|center"/>
+            <View
+                android:layout_width="30sp"
+                android:layout_height="3sp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginTop="150sp"
+                android:background="#BDBDBD"
+
+                />
+
+            <View
+                android:layout_width="30sp"
+                android:layout_height="3sp"
+                android:background="#BDBDBD"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="130sp"
+                android:layout_marginLeft="10sp"
+                />
+
+            <ImageView
+                android:layout_width="150sp"
+                android:layout_height="100sp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/logoinlight" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|center"
+                android:text="TECHEASE SOLUTIONS"
+                android:textColor="#f2f2f2" />
+        </RelativeLayout>
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
